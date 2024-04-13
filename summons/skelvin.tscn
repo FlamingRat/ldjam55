@@ -1,0 +1,100 @@
+[gd_scene load_steps=10 format=3 uid="uid://bo0cwffonwbgn"]
+
+[ext_resource type="Script" path="res://common/character_turn_listener.gd" id="1_cttst"]
+[ext_resource type="Script" path="res://summons/skelvin.gd" id="1_fve1f"]
+[ext_resource type="Texture2D" uid="uid://co7ave47yxtfx" path="res://summons/skelvin.png" id="1_raki8"]
+[ext_resource type="AnimationLibrary" uid="uid://c8p2e6fnke5r8" path="res://common/character_turns.res" id="2_2agrm"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://bs7rbmyb11p53" path="res://common/character_animations.tres" id="3_65y5x"]
+[ext_resource type="Script" path="res://common/character_movement_controller.gd" id="5_rnxha"]
+
+[sub_resource type="Animation" id="Animation_yp3mn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1vptp"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 0, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxw6r"]
+_data = {
+"RESET": SubResource("Animation_yp3mn"),
+"idle": SubResource("Animation_1vptp")
+}
+
+[node name="Skelvin" type="Node3D"]
+script = ExtResource("1_fve1f")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+pixel_size = 0.0625
+billboard = 1
+texture_filter = 2
+render_priority = 1
+texture = ExtResource("1_raki8")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+active = false
+libraries = {
+"": SubResource("AnimationLibrary_rxw6r"),
+"turns": ExtResource("2_2agrm")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rxw6r"),
+"turns": ExtResource("2_2agrm")
+}
+tree_root = ExtResource("3_65y5x")
+anim_player = NodePath("../AnimationPlayer")
+parameters/turn_left/active = false
+parameters/turn_left/internal_active = false
+parameters/turn_left/request = 0
+parameters/turn_right/active = false
+parameters/turn_right/internal_active = false
+parameters/turn_right/request = 0
+
+[node name="CharacterMovementController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("5_rnxha")
+animation_tree = NodePath("../AnimationTree")
+
+[node name="CharacterTurnListener" type="Node" parent="."]
+script = ExtResource("1_cttst")
+
+[connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]

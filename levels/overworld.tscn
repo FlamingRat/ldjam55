@@ -1,8 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=15 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="Shader" path="res://levels/grid.gdshader" id="1_ygkns"]
-[ext_resource type="Script" path="res://player/player.gd" id="2_qlwxj"]
-[ext_resource type="Texture2D" uid="uid://rf4pqpseb237" path="res://player/Vamper-0003.png" id="3_gkksg"]
+[ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
+[ext_resource type="PackedScene" uid="uid://bo0cwffonwbgn" path="res://summons/skelvin.tscn" id="3_ismsp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vftt8"]
 albedo_color = Color(0, 0, 0, 1)
@@ -45,153 +45,6 @@ albedo_texture = SubResource("GradientTexture1D_ftpf0")
 material = SubResource("StandardMaterial3D_4dod8")
 size = Vector2(21, 15)
 
-[sub_resource type="Animation" id="Animation_5bwoh"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 0]
-}
-
-[sub_resource type="Animation" id="Animation_5nbwj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite3D:flip_h")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_0aqhd"]
-resource_name = "turn left"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1.5, 0.5),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(0, 1, 1), Vector3(1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_hk2ip"]
-resource_name = "turn right"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1.5, 0.5),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(0, 1, 1), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qnexx"]
-_data = {
-"RESET": SubResource("Animation_5nbwj"),
-"idle": SubResource("Animation_5bwoh"),
-"turn left": SubResource("Animation_0aqhd"),
-"turn right": SubResource("Animation_hk2ip")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_klcdc"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dit8v"]
-animation = &"turn left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_olf7p"]
-animation = &"turn right"
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_vffut"]
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xfhjo"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_e4vau"]
-graph_offset = Vector2(-361.809, 81.103)
-nodes/Idle/node = SubResource("AnimationNodeAnimation_klcdc")
-nodes/Idle/position = Vector2(-200, 60)
-"nodes/Turn Left/node" = SubResource("AnimationNodeAnimation_dit8v")
-"nodes/Turn Left/position" = Vector2(93.4585, 448.794)
-"nodes/Turn Right/node" = SubResource("AnimationNodeAnimation_olf7p")
-"nodes/Turn Right/position" = Vector2(-80, 240)
-nodes/output/position = Vector2(580, 260)
-nodes/turn_left/node = SubResource("AnimationNodeOneShot_vffut")
-nodes/turn_left/position = Vector2(349.53, 257.143)
-nodes/turn_right/node = SubResource("AnimationNodeOneShot_xfhjo")
-nodes/turn_right/position = Vector2(100, 120)
-node_connections = [&"output", 0, &"turn_left", &"turn_left", 0, &"turn_right", &"turn_left", 1, &"Turn Left", &"turn_right", 0, &"Idle", &"turn_right", 1, &"Turn Right"]
-
 [sub_resource type="Sky" id="Sky_s0b0d"]
 
 [sub_resource type="Environment" id="Environment_kwctn"]
@@ -202,7 +55,7 @@ ambient_light_energy = 16.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_i8eml"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Overworld" type="Node3D"]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -15)
@@ -214,38 +67,7 @@ mesh = SubResource("PlaneMesh_1cyfb")
 [node name="Bounds" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_ch16w")
 
-[node name="Player" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-script = ExtResource("2_qlwxj")
-
-[node name="Sprite3D" type="Sprite3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-pixel_size = 0.0625
-billboard = 1
-no_depth_test = true
-alpha_scissor_threshold = 0.0
-texture_filter = 0
-render_priority = 1
-texture = ExtResource("3_gkksg")
-hframes = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-libraries = {
-"": SubResource("AnimationLibrary_qnexx")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="Player"]
-libraries = {
-"": SubResource("AnimationLibrary_qnexx")
-}
-tree_root = SubResource("AnimationNodeBlendTree_e4vau")
-anim_player = NodePath("../AnimationPlayer")
-parameters/turn_left/active = false
-parameters/turn_left/internal_active = false
-parameters/turn_left/request = 0
-parameters/turn_right/active = false
-parameters/turn_right/internal_active = false
-parameters/turn_right/request = 0
+[node name="Player" parent="." instance=ExtResource("2_7cvbh")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 11, 7)
@@ -253,3 +75,15 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 11, 7)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kwctn")
 camera_attributes = SubResource("CameraAttributesPractical_i8eml")
+
+[node name="Skelvin" parent="." instance=ExtResource("3_ismsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Skelvin2" parent="." instance=ExtResource("3_ismsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0677, 0, 0.918565)
+
+[node name="Skelvin3" parent="." instance=ExtResource("3_ismsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7576, 0, 3.20163)
+
+[node name="Skelvin4" parent="." instance=ExtResource("3_ismsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93174, 0, 4.87976)

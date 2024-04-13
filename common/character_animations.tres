@@ -1,0 +1,29 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=6 format=3 uid="uid://bs7rbmyb11p53"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_klcdc"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dit8v"]
+animation = &"turns/turn left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_olf7p"]
+animation = &"turns/turn right"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_vffut"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xfhjo"]
+
+[resource]
+graph_offset = Vector2(-385.574, -119.502)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_klcdc")
+nodes/Idle/position = Vector2(-200, 60)
+"nodes/Turn Left/node" = SubResource("AnimationNodeAnimation_dit8v")
+"nodes/Turn Left/position" = Vector2(93.4585, 447.33)
+"nodes/Turn Right/node" = SubResource("AnimationNodeAnimation_olf7p")
+"nodes/Turn Right/position" = Vector2(-180, 260)
+nodes/output/position = Vector2(740, 140)
+nodes/turn_left/node = SubResource("AnimationNodeOneShot_vffut")
+nodes/turn_left/position = Vector2(349.53, 254.215)
+nodes/turn_right/node = SubResource("AnimationNodeOneShot_xfhjo")
+nodes/turn_right/position = Vector2(100, 115.3)
+node_connections = [&"output", 0, &"turn_left", &"turn_left", 0, &"turn_right", &"turn_left", 1, &"Turn Left", &"turn_right", 0, &"Idle", &"turn_right", 1, &"Turn Right"]
