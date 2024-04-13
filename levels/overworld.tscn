@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=14 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="Shader" path="res://levels/grid.gdshader" id="1_ygkns"]
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
-[ext_resource type="PackedScene" uid="uid://bo0cwffonwbgn" path="res://summons/skelvin.tscn" id="3_ismsp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vftt8"]
 albedo_color = Color(0, 0, 0, 1)
@@ -75,15 +74,3 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 11, 7)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kwctn")
 camera_attributes = SubResource("CameraAttributesPractical_i8eml")
-
-[node name="Skelvin" parent="." instance=ExtResource("3_ismsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-
-[node name="Skelvin2" parent="." instance=ExtResource("3_ismsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
-
-[node name="Skelvin3" parent="." instance=ExtResource("3_ismsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
-
-[node name="Skelvin4" parent="." instance=ExtResource("3_ismsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)

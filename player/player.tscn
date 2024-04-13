@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7biv641mnrue"]
+[gd_scene load_steps=13 format=3 uid="uid://c7biv641mnrue"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_armax"]
+[ext_resource type="PackedScene" uid="uid://ccwhs1dn3tpvv" path="res://ui/summon_indicator.tscn" id="2_3inrr"]
+[ext_resource type="PackedScene" uid="uid://bo0cwffonwbgn" path="res://summons/skelvin.tscn" id="2_uva74"]
 [ext_resource type="Texture2D" uid="uid://rf4pqpseb237" path="res://player/Vamper-0003.png" id="2_wkwxg"]
 [ext_resource type="AnimationLibrary" uid="uid://c8p2e6fnke5r8" path="res://common/character_turns.res" id="3_5c3ri"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://bs7rbmyb11p53" path="res://common/character_animations.tres" id="4_6q4jw"]
 [ext_resource type="Script" path="res://common/character_movement_controller.gd" id="5_aaepl"]
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="6_ofdec"]
+[ext_resource type="Script" path="res://player/summon_controller.gd" id="8_v5af1"]
 
 [sub_resource type="Animation" id="Animation_5nbwj"]
 length = 0.001
@@ -82,6 +85,7 @@ _data = {
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_armax")
+skelvin = ExtResource("2_uva74")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -121,5 +125,9 @@ animation_tree = NodePath("../AnimationTree")
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("6_ofdec")
+
+[node name="SummonController" type="Node" parent="."]
+script = ExtResource("8_v5af1")
+summon_indicator = ExtResource("2_3inrr")
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]

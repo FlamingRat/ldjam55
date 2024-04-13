@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccwhs1dn3tpvv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j23wg"]
+albedo_color = Color(0.219608, 0.662745, 1, 0.741176)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3pbgr"]
+material = SubResource("StandardMaterial3D_j23wg")
+height = 0.2
+
+[node name="SummonIndicator" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("CylinderMesh_3pbgr")
