@@ -25,3 +25,4 @@ func end_turn():
 
 func register_unit(unit):
 	units.append(unit)
+	next_turn.emit(units[current_turn])

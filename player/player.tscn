@@ -121,3 +121,5 @@ animation_tree = NodePath("../AnimationTree")
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("6_ofdec")
+
+[connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
