@@ -1,43 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=26 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="Shader" path="res://levels/grid.gdshader" id="1_ygkns"]
 [ext_resource type="Script" path="res://player/player.gd" id="2_qlwxj"]
-
-[sub_resource type="Gradient" id="Gradient_ef0vv"]
-colors = PackedColorArray(0.164706, 0.180392, 0, 1, 0, 0.710261, 0.0550306, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vvxdq"]
-frequency = 0.0042
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rsib6"]
-color_ramp = SubResource("Gradient_ef0vv")
-noise = SubResource("FastNoiseLite_vvxdq")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_66rxv"]
-frequency = 0.1207
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q565k"]
-in_3d_space = true
-as_normal_map = true
-bump_strength = 5.6
-noise = SubResource("FastNoiseLite_66rxv")
+[ext_resource type="Texture2D" uid="uid://rf4pqpseb237" path="res://player/Vamper-0003.png" id="3_gkksg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vftt8"]
-albedo_texture = SubResource("NoiseTexture2D_rsib6")
-normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_q565k")
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6rjrs"]
 material = SubResource("StandardMaterial3D_vftt8")
-size = Vector2(100, 100)
+size = Vector2(75, 50)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ormkm"]
 render_priority = 0
 shader = ExtResource("1_ygkns")
 shader_parameter/gridColor = Color(1, 1, 1, 1)
 shader_parameter/checkerColor = Color(1, 1, 1, 0.564706)
-shader_parameter/fadeStart = 0.0
-shader_parameter/fadeEnd = 50.0
+shader_parameter/fadeStart = 10.0
+shader_parameter/fadeEnd = 25.0
 shader_parameter/unitSize = 1.0
 shader_parameter/subdivisions = 1
 shader_parameter/majorLineThickness = 2.0
@@ -47,10 +27,170 @@ shader_parameter/centerOffset = Vector3(0.5, 0, 0.5)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1cyfb"]
 material = SubResource("ShaderMaterial_ormkm")
-size = Vector2(100, 100)
+size = Vector2(50, 50)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ukni1"]
-size = Vector2(16, 16)
+[sub_resource type="Gradient" id="Gradient_k5wu0"]
+offsets = PackedFloat32Array(0.519164)
+colors = PackedColorArray(0.984314, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ftpf0"]
+gradient = SubResource("Gradient_k5wu0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4dod8"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.419608)
+albedo_texture = SubResource("GradientTexture1D_ftpf0")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ch16w"]
+material = SubResource("StandardMaterial3D_4dod8")
+size = Vector2(21, 15)
+
+[sub_resource type="Animation" id="Animation_5bwoh"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_5nbwj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0aqhd"]
+resource_name = "turn left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1.5, 0.5),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_hk2ip"]
+resource_name = "turn right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1.5, 0.5),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 1, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qnexx"]
+_data = {
+"RESET": SubResource("Animation_5nbwj"),
+"idle": SubResource("Animation_5bwoh"),
+"turn left": SubResource("Animation_0aqhd"),
+"turn right": SubResource("Animation_hk2ip")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_klcdc"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dit8v"]
+animation = &"turn left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_olf7p"]
+animation = &"turn right"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_vffut"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xfhjo"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_e4vau"]
+graph_offset = Vector2(-361.809, 81.103)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_klcdc")
+nodes/Idle/position = Vector2(-200, 60)
+"nodes/Turn Left/node" = SubResource("AnimationNodeAnimation_dit8v")
+"nodes/Turn Left/position" = Vector2(93.4585, 448.794)
+"nodes/Turn Right/node" = SubResource("AnimationNodeAnimation_olf7p")
+"nodes/Turn Right/position" = Vector2(-80, 240)
+nodes/output/position = Vector2(580, 260)
+nodes/turn_left/node = SubResource("AnimationNodeOneShot_vffut")
+nodes/turn_left/position = Vector2(349.53, 257.143)
+nodes/turn_right/node = SubResource("AnimationNodeOneShot_xfhjo")
+nodes/turn_right/position = Vector2(100, 120)
+node_connections = [&"output", 0, &"turn_left", &"turn_left", 0, &"turn_right", &"turn_left", 1, &"Turn Left", &"turn_right", 0, &"Idle", &"turn_right", 1, &"Turn Right"]
 
 [sub_resource type="Sky" id="Sky_s0b0d"]
 
@@ -58,30 +198,57 @@ size = Vector2(16, 16)
 sky = SubResource("Sky_s0b0d")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 16.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_i8eml"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -15)
 mesh = SubResource("PlaneMesh_6rjrs")
 
 [node name="FloorGrid" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_1cyfb")
 
+[node name="Bounds" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ch16w")
+
 [node name="Player" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 script = ExtResource("2_qlwxj")
 
 [node name="Sprite3D" type="Sprite3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 pixel_size = 0.0625
 billboard = 1
-texture = SubResource("PlaceholderTexture2D_ukni1")
+no_depth_test = true
+alpha_scissor_threshold = 0.0
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("3_gkksg")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_qnexx")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_qnexx")
+}
+tree_root = SubResource("AnimationNodeBlendTree_e4vau")
+anim_player = NodePath("../AnimationPlayer")
+parameters/turn_left/active = false
+parameters/turn_left/internal_active = false
+parameters/turn_left/request = 0
+parameters/turn_right/active = false
+parameters/turn_right/internal_active = false
+parameters/turn_right/request = 0
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 0)
-fov = 80.0
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 11, 7)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kwctn")
