@@ -5,14 +5,6 @@ class_name WanderMovement
 @export var movement_controller: CharacterMovementController
 
 
-var actions = {
-	1: func(): movement_controller.move(Vector3.RIGHT),
-	2: func(): movement_controller.move(Vector3.LEFT),
-	3: func(): movement_controller.move(Vector3.FORWARD),
-	4: func(): movement_controller.move(Vector3.BACK),
-}
-
-
 func rand():
 	var directions = allowed_directions()
 	if not len(directions):
@@ -27,4 +19,5 @@ func allowed_directions():
 		if movement_controller.movement_allowed(dir):
 			directions.append(dir)
 
+	print(directions)
 	return directions

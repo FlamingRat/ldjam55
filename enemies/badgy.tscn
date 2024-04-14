@@ -153,6 +153,8 @@ animation_tree = NodePath("../AnimationTree")
 collision_detector = NodePath("CollisionDetector")
 
 [node name="CollisionDetector" type="RayCast3D" parent="CharacterMovementController"]
+target_position = Vector3(1, 0, 0)
+hit_from_inside = true
 collide_with_areas = true
 
 [node name="AttackRange" parent="." instance=ExtResource("5_mrubn")]

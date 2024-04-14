@@ -5,15 +5,37 @@ class_name CharacterMovementController
 @export var animation_tree: AnimationTree
 @export var collision_detector: RayCast3D
 var facing_right = true
+var moving_direction = Vector3.ZERO
+
+
+func snap_to_grid():
+	var parent: Node3D = get_parent()
+	if moving_direction.x and not is_integer(parent.global_position.x):
+		if moving_direction.x > 0:
+			parent.global_position.x = ceil(parent.global_position.x)
+		else:
+			parent.global_position.x = floor(parent.global_position.x)
+
+	if moving_direction.z and not is_integer(parent.global_position.z):
+		if moving_direction.z > 0:
+			parent.global_position.z = ceil(parent.global_position.z)
+		else:
+			parent.global_position.z = floor(parent.global_position.z)
+
+
+func is_integer(n: float):
+	var integer = floor(n)
+	return n - integer == 0
 
 
 func move(dir: Vector3) -> void:
 	var move_tween := create_tween()
 	var parent = get_parent()
 	if not movement_allowed(dir):
-		## TODO: play movement blocked sound
 		return
 
+	snap_to_grid()
+	moving_direction = dir
 	move_tween.tween_property(parent, "global_position", parent.global_position + dir, 0.3)
 
 	if dir.x < 0 and facing_right:
@@ -33,18 +55,20 @@ func movement_allowed(direction: Vector3):
 		return true
 
 	collision_detector.global_position = get_parent().global_position
-	collision_detector.target_position = direction
+	collision_detector.target_position = direction * 1.5
 	var collisions = []
+	collision_detector.force_raycast_update()
 	while collision_detector.get_collider():
 		collision_detector.force_raycast_update()
 
-		var coll = collision_detector.get_collider()
+		var coll := collision_detector.get_collider()
+		if not coll:
+			continue
+
 		collisions.append(coll)
 		collision_detector.add_exception(coll)
 
 	collision_detector.clear_exceptions()
-	print('Checking colliders ', collisions)
-
 	return not collisions.any(is_hitbox)
 
 
