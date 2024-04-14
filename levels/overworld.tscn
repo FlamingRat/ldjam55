@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=28 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
 [ext_resource type="Texture2D" uid="uid://dxqyj6coi7fmi" path="res://levels/grid.png" id="2_jwiha"]
@@ -9,6 +9,19 @@
 [ext_resource type="Script" path="res://ui/log.gd" id="6_c8um8"]
 [ext_resource type="Texture2D" uid="uid://c4hnbbj2m6iaj" path="res://ui/vamper_walls.png" id="9_5nfgd"]
 [ext_resource type="Texture2D" uid="uid://kt057pvlb8b2" path="res://ui/vamper-tiles.png" id="9_p8bsw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5vxg"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_dv2l5"]
+sky_material = SubResource("ProceduralSkyMaterial_c5vxg")
+
+[sub_resource type="Environment" id="Environment_o5dg7"]
+background_mode = 2
+sky = SubResource("Sky_dv2l5")
+tonemap_mode = 2
+volumetric_fog_enabled = true
 
 [sub_resource type="Animation" id="Animation_1tngm"]
 resource_name = "new_animation"
@@ -46,17 +59,6 @@ _data = {
 "RESET": SubResource("Animation_q3vdr"),
 "new_animation": SubResource("Animation_1tngm")
 }
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1tj0"]
-sky_top_color = Color(1, 1, 1, 1)
-
-[sub_resource type="Sky" id="Sky_yolmc"]
-sky_material = SubResource("ProceduralSkyMaterial_i1tj0")
-
-[sub_resource type="Environment" id="Environment_knx1d"]
-background_mode = 1
-sky = SubResource("Sky_yolmc")
-ambient_light_source = 3
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7smoa"]
 offset = Vector3(0.5, 0.5, 0.5)
@@ -109,10 +111,18 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_hqs35")
 size = Vector3(21, 10, 1)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2er3p"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j6qgg"]
+noise = SubResource("FastNoiseLite_2er3p")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8u3rw"]
 albedo_texture = ExtResource("9_5nfgd")
 albedo_texture_force_srgb = true
-uv1_scale = Vector3(0.12, 1, 0.12)
+emission = Color(0.196078, 0.196078, 0.196078, 1)
+backlight = Color(1, 1, 1, 1)
+backlight_texture = SubResource("NoiseTexture2D_j6qgg")
+uv1_scale = Vector3(0.12, 1.18, 0.18)
 uv1_triplanar = true
 uv1_world_triplanar = true
 texture_filter = 0
@@ -122,6 +132,17 @@ material = SubResource("StandardMaterial3D_8u3rw")
 size = Vector3(1, 10, 15)
 
 [node name="Overworld" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o5dg7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.192522, 0.975737, 0.104276, 0, -0.106264, 0.994338, 0.981293, -0.191432, -0.0204582, 0, 0, 0)
+light_energy = 0.154
+shadow_enabled = true
+shadow_opacity = 0.65
+shadow_blur = 6.0
+directional_shadow_split_3 = 1.0
 
 [node name="Grid" type="Sprite3D" parent="."]
 pixel_size = 0.0313
@@ -144,9 +165,6 @@ speed_scale = 0.2
 transform = Transform3D(1, -6.76539e-16, 1.19292e-16, 1.19292e-16, 0.34202, 0.939692, -6.76539e-16, -0.939692, 0.34202, 2.08165e-12, 8, 4)
 script = ExtResource("3_mka4u")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_knx1d")
-
 [node name="Spawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 script = ExtResource("3_r3tab")
@@ -168,6 +186,7 @@ offset_right = -26.0
 offset_bottom = -529.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
 editable = false
 wrap_mode = 1
 script = ExtResource("6_c8um8")
@@ -194,7 +213,8 @@ mesh = SubResource("BoxMesh_1s0rp")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.93694, 2.69747, 0)
-light_energy = 9.657
+visible = false
+light_energy = 5.734
 light_indirect_energy = 6.688
 omni_range = 21.89
 omni_attenuation = 0.0647041
@@ -204,8 +224,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 5, 0)
 mesh = SubResource("BoxMesh_1s0rp")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2224, 4.14493, 0)
-light_energy = 9.657
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.27945, 4.14493, 0)
+visible = false
+light_energy = 5.657
 light_indirect_energy = 6.688
 omni_range = 21.89
 omni_attenuation = 0.0647041
