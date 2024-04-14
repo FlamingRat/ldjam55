@@ -2,12 +2,6 @@ extends Node3D
 class_name Player
 
 
-enum PlayerState {
-	WALKING,
-	SUMMONING,
-}
-
-
 @export var skelvin: PackedScene
 @export var movement_speed: int
 @export var mana: int = 1
@@ -16,8 +10,7 @@ enum PlayerState {
 @onready var summons := $SummonController
 @onready var collision_detector := $CollisionDetector
 @onready var steps_available = movement_speed
-var player_state = PlayerState.WALKING
-var current_mana = mana
+@onready var current_mana = mana
 
 
 var turn_actions: bool:
@@ -54,15 +47,15 @@ func turn_input_listener():
 
 
 func start_summon():
-	if not current_mana or player_state != PlayerState.WALKING:
+	if not current_mana or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
 		return
 
-	player_state = PlayerState.SUMMONING
+	GlobalEvents.player_state = GlobalEvents.PlayerState.SUMMONING
 	summons.start_summon(Vector3.RIGHT if movement.facing_right else Vector3.LEFT)
 
 
 func summon(pos: Vector3):
-	player_state = PlayerState.WALKING
+	GlobalEvents.player_state = GlobalEvents.PlayerState.WALKING
 	var inst_skelvin: Skelvin = skelvin.instantiate()
 	get_parent().add_child(inst_skelvin)
 	inst_skelvin.global_position = pos
@@ -70,7 +63,7 @@ func summon(pos: Vector3):
 
 
 func move_up():
-	if not steps_available or player_state != PlayerState.WALKING:
+	if not steps_available or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
 		return
 
 	if not movement.movement_allowed(Vector3.FORWARD):
@@ -81,7 +74,7 @@ func move_up():
 
 
 func move_down():
-	if not steps_available or player_state != PlayerState.WALKING:
+	if not steps_available or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
 		return
 
 	if not movement.movement_allowed(Vector3.BACK):
@@ -92,7 +85,7 @@ func move_down():
 
 
 func move_left():
-	if not steps_available or player_state != PlayerState.WALKING:
+	if not steps_available or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
 		return
 
 	if not movement.movement_allowed(Vector3.LEFT):
@@ -103,7 +96,7 @@ func move_left():
 
 
 func move_right():
-	if not steps_available or player_state != PlayerState.WALKING:
+	if not steps_available or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
 		return
 
 	if not movement.movement_allowed(Vector3.RIGHT):

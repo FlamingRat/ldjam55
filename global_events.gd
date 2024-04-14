@@ -1,12 +1,18 @@
 extends Node
 
 
+const TURN_TIME: float = 5
+
+
+enum PlayerState {
+	WALKING,
+	SUMMONING,
+}
+
+
 signal next_turn(unit: Node3D)
 signal next_turn_announced(unit: Node3D)
 signal attack(attacker: AttackRange, health: Health)
-
-
-const TURN_TIME: float = 5
 
 
 var timer = TURN_TIME
@@ -18,6 +24,7 @@ var current_turn_unit: Node3D:
 			current_turn = 0
 
 		return units[current_turn]
+var player_state = PlayerState.WALKING
 
 
 func end_turn():

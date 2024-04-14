@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://common/attack_range.gd" id="1_4bs2p"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0o03n"]
-radius = 1.0
+radius = 1.25
 
 [node name="AttackRange" type="Area3D"]
 script = ExtResource("1_4bs2p")

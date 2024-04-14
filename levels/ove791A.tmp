@@ -168,11 +168,9 @@ current = true
 script = ExtResource("3_mka4u")
 
 [node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 script = ExtResource("3_r3tab")
 spawn = ExtResource("3_qrpkt")
-spawn_range = 7
-spawn_per_turn = 1
-turns_per_spawn_per_turn_increase = 5
 
 [node name="CharacterTurnListener" type="Node" parent="Spawner"]
 script = ExtResource("5_6jcuj")

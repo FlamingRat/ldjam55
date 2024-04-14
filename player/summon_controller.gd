@@ -18,7 +18,7 @@ var frame_lock = false
 
 
 func _process(_delta):
-	var summoning = player.player_state == player.PlayerState.SUMMONING
+	var summoning = GlobalEvents.player_state == GlobalEvents.PlayerState.SUMMONING
 	if not summoning or frame_lock:
 		frame_lock = false
 		return
