@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=16 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
 [ext_resource type="Texture2D" uid="uid://dxqyj6coi7fmi" path="res://levels/grid.png" id="2_jwiha"]
 [ext_resource type="PackedScene" uid="uid://caut86utiy4sd" path="res://enemies/badgy.tscn" id="3_qrpkt"]
 [ext_resource type="Script" path="res://enemies/spawner.gd" id="3_r3tab"]
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="5_6jcuj"]
+[ext_resource type="Script" path="res://ui/log.gd" id="6_c8um8"]
 
 [sub_resource type="Curve" id="Curve_j7rfp"]
 _data = [Vector2(0.168874, 0.541888), 0.0, 0.0, 0, 0, Vector2(0.814569, 0.680186), 0.0, 0.0, 0, 0]
@@ -69,5 +70,21 @@ spawn_cooldown = 5
 
 [node name="CharacterTurnListener" type="Node" parent="Spawner"]
 script = ExtResource("5_6jcuj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 765.0
+offset_top = 21.0
+offset_right = -26.0
+offset_bottom = -532.0
+grow_horizontal = 2
+grow_vertical = 2
+editable = false
+wrap_mode = 1
+script = ExtResource("6_c8um8")
 
 [connection signal="on_turn" from="Spawner/CharacterTurnListener" to="Spawner" method="_on_character_turn_listener_on_turn"]

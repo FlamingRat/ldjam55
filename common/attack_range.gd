@@ -1,4 +1,5 @@
 extends Area3D
+class_name AttackRange
 
 
 @export var attack_damage: int = 5
@@ -14,13 +15,16 @@ func attack_any():
 			continue
 
 		var alignment: Alignment = body.get_node('Alignment')
-		if not alignment or alignment.faction != faction_self:
-			var health = body.get_node('Health')
-			if not (health is Health):
-				continue
+		if alignment and alignment.faction == faction_self:
+			continue
 
-			print('Attacking ', body)
-			health.damage(attack_damage)
-			return true
+		var health = body.get_node('Health')
+		if not (health is Health):
+			continue
+
+		print('Attacking ', body)
+		health.damage(attack_damage)
+		GlobalEvents.attack.emit(self, health)
+		return true
 
 	return false

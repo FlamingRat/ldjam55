@@ -6,8 +6,8 @@ class_name WanderMovement
 
 
 var actions = {
-	1: func(): movement_controller.move_right(),
-	2: func(): movement_controller.move_left(),
+	1: func(): movement_controller.move(Vector3.RIGHT),
+	2: func(): movement_controller.move(Vector3.LEFT),
 	3: func(): movement_controller.move(Vector3.FORWARD),
 	4: func(): movement_controller.move(Vector3.BACK),
 }

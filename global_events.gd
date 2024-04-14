@@ -1,8 +1,8 @@
 extends Node
-class_name GlobalEventsNode
 
 
 signal next_turn
+signal attack(attacker: AttackRange, health: Health)
 
 
 const TURN_TIME: float = 5

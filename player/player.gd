@@ -88,7 +88,7 @@ func move_left():
 	if not steps_available or player_state != PlayerState.WALKING:
 		return
 
-	movement.move_left()
+	movement.move(Vector3.LEFT)
 	steps_available -= 1
 
 
@@ -96,7 +96,7 @@ func move_right():
 	if not steps_available or player_state != PlayerState.WALKING:
 		return
 
-	movement.move_right()
+	movement.move(Vector3.RIGHT)
 	steps_available -= 1
 
 
