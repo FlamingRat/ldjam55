@@ -102,3 +102,7 @@ func move_right():
 
 func end_turn():
 	GlobalEvents.end_turn()
+
+
+func _on_health_health_depleted():
+	queue_free()

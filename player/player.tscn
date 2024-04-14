@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c7biv641mnrue"]
+[gd_scene load_steps=18 format=3 uid="uid://c7biv641mnrue"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_armax"]
 [ext_resource type="PackedScene" uid="uid://ccwhs1dn3tpvv" path="res://ui/summon_indicator.tscn" id="2_3inrr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://tq2rmvx4gyfm" path="res://player/movement_range_indicator.tscn" id="10_gppho"]
 [ext_resource type="Script" path="res://common/health.gd" id="11_ghche"]
 [ext_resource type="Script" path="res://common/alignment.gd" id="12_mmwt1"]
+[ext_resource type="PackedScene" uid="uid://b0dsum4kcwukr" path="res://common/health_bar.tscn" id="13_clpif"]
 
 [sub_resource type="Animation" id="Animation_5nbwj"]
 length = 0.001
@@ -150,4 +151,8 @@ current_health = 15
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("12_mmwt1")
 
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("13_clpif")]
+health = NodePath("../Health")
+
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

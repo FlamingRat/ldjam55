@@ -8,6 +8,9 @@ signal health_depleted
 
 @export var max_health: int = 10
 @export var current_health: int = 10
+var percent: float:
+	get:
+		return float(current_health) / float(max_health)
 
 
 func damage(hit: int):

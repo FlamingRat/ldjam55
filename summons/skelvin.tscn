@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bo0cwffonwbgn"]
+[gd_scene load_steps=15 format=3 uid="uid://bo0cwffonwbgn"]
 
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="1_cttst"]
 [ext_resource type="Script" path="res://summons/skelvin.gd" id="1_fve1f"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://common/health.gd" id="7_bempt"]
 [ext_resource type="PackedScene" uid="uid://dvapfrkrrhhyn" path="res://common/attack_range.tscn" id="8_sf5pn"]
 [ext_resource type="Script" path="res://common/alignment.gd" id="9_3p48q"]
+[ext_resource type="PackedScene" uid="uid://b0dsum4kcwukr" path="res://common/health_bar.tscn" id="10_fedya"]
 
 [sub_resource type="Animation" id="Animation_yp3mn"]
 length = 0.001
@@ -117,6 +118,9 @@ attack_damage = 3
 
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("9_3p48q")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_fedya")]
+health = NodePath("../Health")
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0dsum4kcwukr"]
+
+[ext_resource type="Script" path="res://common/health_bar.gd" id="1_jbfsw"]
+
+[sub_resource type="Gradient" id="Gradient_r1sll"]
+colors = PackedColorArray(0.23, 1, 0.23, 1, 0.6515, 1, 0.59, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kwm6a"]
+gradient = SubResource("Gradient_r1sll")
+width = 16
+height = 2
+fill_to = Vector2(0, 1)
+
+[node name="HealthBar" type="Node3D"]
+script = ExtResource("1_jbfsw")
+
+[node name="HealthBarFill" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+pixel_size = 0.0625
+billboard = 1
+render_priority = 6
+texture = SubResource("GradientTexture2D_kwm6a")
