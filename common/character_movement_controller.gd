@@ -51,7 +51,7 @@ func move(dir: Vector3) -> void:
 
 func movement_allowed(direction: Vector3):
 	if not collision_detector:
-		print('Warn: Collision detector missing at ', self)
+		printerr('Warn: Collision detector missing at ', self)
 		return true
 
 	collision_detector.global_position = get_parent().global_position

@@ -35,7 +35,7 @@ func focus(unit: Node3D):
 
 
 func allow_next_turn(unit = null):
-	if unit and not unit.is_queued_for_deletion():
+	if weakref(unit).get_ref() and not unit.is_queued_for_deletion():
 		follow = unit
 
 	GlobalEvents.start_turn()
