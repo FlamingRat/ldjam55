@@ -5,7 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://co7ave47yxtfx" path="res://summons/skelvin.png" id="1_raki8"]
 [ext_resource type="AnimationLibrary" uid="uid://c8p2e6fnke5r8" path="res://common/character_turns.res" id="2_2agrm"]
 [ext_resource type="Animation" uid="uid://6bj6lt8u47df" path="res://common/take_damage_animation.res" id="3_0m31u"]
+[ext_resource type="Animation" uid="uid://p8cd36okxm76" path="res://common/skelvin_attack.res" id="3_5jb8r"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://bs7rbmyb11p53" path="res://common/character_animations.tres" id="3_65y5x"]
+[ext_resource type="Animation" uid="uid://d1hq6kqondq8j" path="res://common/skelvin_idle.res" id="4_kejrp"]
 [ext_resource type="Script" path="res://common/character_movement_controller.gd" id="5_rnxha"]
 [ext_resource type="Script" path="res://common/health.gd" id="7_bempt"]
 [ext_resource type="PackedScene" uid="uid://dvapfrkrrhhyn" path="res://common/attack_range.tscn" id="8_sf5pn"]
@@ -65,55 +67,11 @@ tracks/3/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_yc3df"]
-resource_name = "attack"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(5, 2.08165e-12), Vector2(3, 2.08165e-12), Vector2(5, 2.08165e-12)]
-}
-
-[sub_resource type="Animation" id="Animation_1vptp"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rxw6r"]
 _data = {
 "RESET": SubResource("Animation_yp3mn"),
-"attack": SubResource("Animation_yc3df"),
-"idle": SubResource("Animation_1vptp"),
+"attack": ExtResource("3_5jb8r"),
+"idle": ExtResource("4_kejrp"),
 "take_damage_animation": ExtResource("3_0m31u")
 }
 

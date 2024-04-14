@@ -55,7 +55,7 @@ func movement_allowed(direction: Vector3):
 		return true
 
 	collision_detector.global_position = get_parent().global_position
-	collision_detector.target_position = direction * 1.5
+	collision_detector.target_position = direction * 1.25
 	var collisions = []
 	collision_detector.force_raycast_update()
 	while collision_detector.get_collider():

@@ -9,14 +9,14 @@ enum PlayerState {
 
 
 @export var skelvin: PackedScene
-@export var movement_speed: int = 3
+@export var movement_speed: int
 @export var mana: int = 1
 @export var summon_range: int = 2
 @onready var movement := $CharacterMovementController
 @onready var summons := $SummonController
 @onready var collision_detector := $CollisionDetector
+@onready var steps_available = movement_speed
 var player_state = PlayerState.WALKING
-var steps_available = movement_speed
 var current_mana = mana
 
 

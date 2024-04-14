@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://caut86utiy4sd"]
+[gd_scene load_steps=19 format=3 uid="uid://caut86utiy4sd"]
 
 [ext_resource type="Texture2D" uid="uid://co7ave47yxtfx" path="res://summons/skelvin.png" id="1_2lu46"]
 [ext_resource type="Script" path="res://enemies/badgy.gd" id="1_48qu0"]
@@ -10,8 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://b0dsum4kcwukr" path="res://common/health_bar.tscn" id="8_d4p1b"]
 [ext_resource type="Script" path="res://common/wander_movement.gd" id="9_rqgoq"]
 [ext_resource type="AnimationLibrary" uid="uid://c8p2e6fnke5r8" path="res://common/character_turns.res" id="10_gf6bf"]
-[ext_resource type="Animation" uid="uid://6bj6lt8u47df" path="res://common/take_damage_animation.res" id="10_k5ti6"]
 [ext_resource type="PackedScene" uid="uid://j42lyhv85siv" path="res://common/hitbox.tscn" id="11_57mp8"]
+[ext_resource type="Animation" uid="uid://d1hq6kqondq8j" path="res://common/skelvin_idle.res" id="11_r8t8x"]
+[ext_resource type="Animation" uid="uid://p8cd36okxm76" path="res://common/skelvin_attack.res" id="12_flsm0"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://bs7rbmyb11p53" path="res://common/character_animations.tres" id="13_td45x"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6ve58"]
 radius = 8.0
@@ -55,76 +57,40 @@ tracks/2/keys = {
 "values": [Color(1, 0.74902, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_07qny"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_mnpyd"]
+resource_name = "take damage"
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("Sprite3D:flip_h")
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(0, 0.2, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.74902, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 0.74902, 0, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/path = NodePath("Sprite3D:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1)]
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(3, 2.08165e-12), Vector2(-3, 2.08165e-12), Vector2(3, 2.08165e-12), Vector2(-3, 2.08165e-12), Vector2(2.08165e-12, 2.08165e-12)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t4323"]
 _data = {
 "RESET": SubResource("Animation_hkdjy"),
-"idle": SubResource("Animation_07qny"),
-"take_damage_animation": ExtResource("10_k5ti6")
+"attack": ExtResource("12_flsm0"),
+"idle": ExtResource("11_r8t8x"),
+"take_damage_animation": SubResource("Animation_mnpyd")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbi1q"]
-animation = &"character_turns/turn right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wp18d"]
-animation = &"character_turns/turn left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_31xko"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4h1aa"]
-animation = &"take_damage_animation"
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_0scsa"]
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_qnwqe"]
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_alh3q"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_evm8g"]
-graph_offset = Vector2(-406.713, 96.6954)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_wp18d")
-nodes/Animation/position = Vector2(-480, 340)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_wbi1q")
-"nodes/Animation 2/position" = Vector2(-260, 440)
-nodes/idle/node = SubResource("AnimationNodeAnimation_31xko")
-nodes/idle/position = Vector2(-562.375, 159.461)
-nodes/output/position = Vector2(620, 260)
-"nodes/take damage anim/node" = SubResource("AnimationNodeAnimation_4h1aa")
-"nodes/take damage anim/position" = Vector2(180, 400)
-nodes/take_damage/node = SubResource("AnimationNodeOneShot_0scsa")
-nodes/take_damage/position = Vector2(435.3, 268.465)
-nodes/turn_left/node = SubResource("AnimationNodeOneShot_qnwqe")
-nodes/turn_left/position = Vector2(-200, 100)
-nodes/turn_right/node = SubResource("AnimationNodeOneShot_alh3q")
-nodes/turn_right/position = Vector2(26.058, 197.254)
-node_connections = [&"output", 0, &"take_damage", &"take_damage", 0, &"turn_right", &"take_damage", 1, &"take damage anim", &"turn_left", 0, &"idle", &"turn_left", 1, &"Animation", &"turn_right", 0, &"turn_left", &"turn_right", 1, &"Animation 2"]
 
 [node name="Badgy" type="Node3D"]
 script = ExtResource("1_48qu0")
@@ -158,7 +124,8 @@ target_position = Vector3(1, 0, 0)
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="AttackRange" parent="." instance=ExtResource("5_mrubn")]
+[node name="AttackRange" parent="." node_paths=PackedStringArray("animator") instance=ExtResource("5_mrubn")]
+animator = NodePath("../AnimationTree")
 attack_damage = 3
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
@@ -180,10 +147,13 @@ movement_controller = NodePath("../CharacterMovementController")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_t4323"),
-"character_turns": ExtResource("10_gf6bf")
+"turns": ExtResource("10_gf6bf")
 }
-tree_root = SubResource("AnimationNodeBlendTree_evm8g")
+tree_root = ExtResource("13_td45x")
 anim_player = NodePath("../AnimationPlayer")
+parameters/attack/active = false
+parameters/attack/internal_active = false
+parameters/attack/request = 0
 parameters/take_damage/active = false
 parameters/take_damage/internal_active = false
 parameters/take_damage/request = 0
@@ -197,7 +167,7 @@ parameters/turn_right/request = 0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_t4323"),
-"character_turns": ExtResource("10_gf6bf")
+"turns": ExtResource("10_gf6bf")
 }
 
 [node name="Hitbox" parent="." instance=ExtResource("11_57mp8")]
