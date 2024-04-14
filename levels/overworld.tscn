@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=26 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
 [ext_resource type="Texture2D" uid="uid://dxqyj6coi7fmi" path="res://levels/grid.png" id="2_jwiha"]
@@ -7,6 +7,45 @@
 [ext_resource type="Script" path="res://enemies/spawner.gd" id="3_r3tab"]
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="5_6jcuj"]
 [ext_resource type="Script" path="res://ui/log.gd" id="6_c8um8"]
+[ext_resource type="Texture2D" uid="uid://c4hnbbj2m6iaj" path="res://ui/vamper_walls.png" id="9_5nfgd"]
+[ext_resource type="Texture2D" uid="uid://kt057pvlb8b2" path="res://ui/vamper-tiles.png" id="9_p8bsw"]
+
+[sub_resource type="Animation" id="Animation_1tngm"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q3vdr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ymuj8"]
+_data = {
+"RESET": SubResource("Animation_q3vdr"),
+"new_animation": SubResource("Animation_1tngm")
+}
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1tj0"]
 sky_top_color = Color(1, 1, 1, 1)
@@ -16,18 +55,88 @@ sky_material = SubResource("ProceduralSkyMaterial_i1tj0")
 
 [sub_resource type="Environment" id="Environment_knx1d"]
 background_mode = 1
-background_color = Color(0.0862745, 0.0745098, 0.141176, 1)
-background_energy_multiplier = 4.17
 sky = SubResource("Sky_yolmc")
 ambient_light_source = 3
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7smoa"]
+offset = Vector3(0.5, 0.5, 0.5)
+fractal_gain = 0.75
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_up3ka"]
+height = 64
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 26.8
+noise = SubResource("FastNoiseLite_7smoa")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_buhdh"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vellx"]
+invert = true
+seamless = true
+noise = SubResource("FastNoiseLite_buhdh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tuhe"]
+albedo_texture = ExtResource("9_p8bsw")
+albedo_texture_force_srgb = true
+normal_texture = SubResource("NoiseTexture2D_up3ka")
+rim_tint = 0.54
+rim_texture = SubResource("NoiseTexture2D_vellx")
+heightmap_scale = 16.0
+heightmap_texture = ExtResource("9_p8bsw")
+uv1_scale = Vector3(0.12, 1, 1)
+uv1_offset = Vector3(0.5, 0, 0.5)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.999999
+uv2_scale = Vector3(0.12, 1, 1)
+uv2_offset = Vector3(0.5, 0, 0.5)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nlgnt"]
+material = SubResource("StandardMaterial3D_3tuhe")
+size = Vector2(21, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqs35"]
+albedo_texture = ExtResource("9_5nfgd")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(0.12, 1, 1)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ghgy"]
+material = SubResource("StandardMaterial3D_hqs35")
+size = Vector3(21, 10, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8u3rw"]
+albedo_texture = ExtResource("9_5nfgd")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(0.12, 1, 0.12)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_1s0rp"]
+material = SubResource("StandardMaterial3D_8u3rw")
+size = Vector3(1, 10, 15)
+
 [node name="Overworld" type="Node3D"]
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+[node name="Grid" type="Sprite3D" parent="."]
 pixel_size = 0.0313
 axis = 1
+texture_filter = 0
+render_priority = 2
 texture = ExtResource("2_jwiha")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Grid"]
+deterministic = true
+libraries = {
+"": SubResource("AnimationLibrary_ymuj8")
+}
+autoplay = "new_animation"
+speed_scale = 0.2
 
 [node name="Player" parent="." instance=ExtResource("2_7cvbh")]
 
@@ -71,5 +180,34 @@ offset_bottom = 207.0
 text = "[Arrow keys] Move
 [Space] Summon Skelvin
 [E] End turn"
+
+[node name="FloorTexture" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_nlgnt")
+
+[node name="Backwall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -8)
+mesh = SubResource("BoxMesh_4ghgy")
+
+[node name="Leftwall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 5, 0)
+mesh = SubResource("BoxMesh_1s0rp")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.93694, 2.69747, 0)
+light_energy = 9.657
+light_indirect_energy = 6.688
+omni_range = 21.89
+omni_attenuation = 0.0647041
+
+[node name="Rightwall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 5, 0)
+mesh = SubResource("BoxMesh_1s0rp")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2224, 4.14493, 0)
+light_energy = 9.657
+light_indirect_energy = 6.688
+omni_range = 21.89
+omni_attenuation = 0.0647041
 
 [connection signal="on_turn" from="Spawner/CharacterTurnListener" to="Spawner" method="_on_character_turn_listener_on_turn"]
