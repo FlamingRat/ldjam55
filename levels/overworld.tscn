@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=10 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
 [ext_resource type="Texture2D" uid="uid://dxqyj6coi7fmi" path="res://levels/grid.png" id="2_jwiha"]
@@ -7,28 +7,6 @@
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="5_6jcuj"]
 [ext_resource type="Script" path="res://ui/log.gd" id="6_c8um8"]
 
-[sub_resource type="Curve" id="Curve_j7rfp"]
-_data = [Vector2(0.168874, 0.541888), 0.0, 0.0, 0, 0, Vector2(0.814569, 0.680186), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_e3674"]
-curve = SubResource("Curve_j7rfp")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8m50y"]
-frequency = 0.0928
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5vme0"]
-noise = SubResource("FastNoiseLite_8m50y")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vftt8"]
-albedo_color = Color(0.203922, 0.117647, 0.356863, 1)
-albedo_texture = SubResource("CurveTexture_e3674")
-normal_texture = SubResource("NoiseTexture2D_5vme0")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_6rjrs"]
-material = SubResource("StandardMaterial3D_vftt8")
-size = Vector2(75, 50)
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1tj0"]
 sky_top_color = Color(1, 1, 1, 1)
 
@@ -36,8 +14,8 @@ sky_top_color = Color(1, 1, 1, 1)
 sky_material = SubResource("ProceduralSkyMaterial_i1tj0")
 
 [sub_resource type="Environment" id="Environment_knx1d"]
-background_mode = 2
-background_color = Color(1, 1, 1, 1)
+background_mode = 1
+background_color = Color(0.0862745, 0.0745098, 0.141176, 1)
 background_energy_multiplier = 4.17
 sky = SubResource("Sky_yolmc")
 ambient_light_source = 3
@@ -50,14 +28,10 @@ pixel_size = 0.0313
 axis = 1
 texture = ExtResource("2_jwiha")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -15)
-mesh = SubResource("PlaneMesh_6rjrs")
-
 [node name="Player" parent="." instance=ExtResource("2_7cvbh")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 11, 7)
+transform = Transform3D(1, -6.34496e-16, 2.00056e-16, 2.00056e-16, 0.573576, 0.819152, -6.34496e-16, -0.819152, 0.573576, 2.08165e-12, 11, 7.5)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_knx1d")
@@ -73,18 +47,27 @@ script = ExtResource("5_6jcuj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextEdit" type="TextEdit" parent="CanvasLayer"]
+[node name="Log" type="TextEdit" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 765.0
+offset_left = 824.0
 offset_top = 21.0
 offset_right = -26.0
-offset_bottom = -532.0
+offset_bottom = -529.0
 grow_horizontal = 2
 grow_vertical = 2
 editable = false
 wrap_mode = 1
 script = ExtResource("6_c8um8")
+
+[node name="Commands" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 340.0
+offset_bottom = 207.0
+text = "[Arrow keys] Move
+[Space] Summon Skelvin
+[E] End turn"
 
 [connection signal="on_turn" from="Spawner/CharacterTurnListener" to="Spawner" method="_on_character_turn_listener_on_turn"]

@@ -9,6 +9,9 @@ func _ready():
 
 
 func announce_turn(unit: Node3D):
+	if unit is Spawner:
+		return
+
 	text += '\n' + unit.name + "'s turn!"
 	set_caret_line(get_line_count())
 
