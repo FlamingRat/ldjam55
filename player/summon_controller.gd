@@ -38,19 +38,35 @@ func start_summon(pos: Vector3):
 
 
 func up():
-	indicator.position += Vector3.FORWARD
+	var intent = indicator.position + Vector3.FORWARD
+	if intent.length() >= player.summon_range:
+		return
+
+	indicator.position = intent
 
 
 func down():
-	indicator.position += Vector3.BACK
+	var intent = indicator.position + Vector3.BACK
+	if intent.length() >= player.summon_range:
+		return
+
+	indicator.position = intent
 
 
 func left():
-	indicator.position += Vector3.LEFT
+	var intent = indicator.position + Vector3.LEFT
+	if intent.length() >= player.summon_range:
+		return
+
+	indicator.position = intent
 
 
 func right():
-	indicator.position += Vector3.RIGHT
+	var intent = indicator.position + Vector3.RIGHT
+	if intent.length() >= player.summon_range:
+		return
+
+	indicator.position = intent
 
 
 func confirm_summon():
