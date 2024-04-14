@@ -14,11 +14,13 @@ var summon_controls = {
 @export var summon_indicator: PackedScene
 @onready var player: Player = get_parent()
 var indicator: Node3D
+var frame_lock = false
 
 
 func _process(_delta):
 	var summoning = player.player_state == player.PlayerState.SUMMONING
-	if not summoning or player.action_lock:
+	if not summoning or frame_lock:
+		frame_lock = false
 		return
 
 	for action in summon_controls:
@@ -29,6 +31,7 @@ func _process(_delta):
 
 
 func start_summon(pos: Vector3):
+	frame_lock = true
 	indicator = summon_indicator.instantiate()
 	player.add_child(indicator)
 	indicator.position = pos

@@ -6,28 +6,25 @@ class_name CharacterMovementController
 var facing_right = true
 
 
-func move(dir: Vector3) -> bool:
+func move(dir: Vector3) -> void:
 	var move_tween := create_tween()
 	var parent = get_parent()
 	move_tween.tween_property(parent, "global_position", parent.global_position + dir, 0.3)
-	return true
 
 
-func move_left() -> bool:
+func move_left() -> void:
 	move(Vector3.LEFT)
 	if not facing_right:
-		return true
+		return
 	
 	animation_tree.set('parameters/turn_left/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	facing_right = false
-	return true
 
 
-func move_right() -> bool:
+func move_right() -> void:
 	move(Vector3.RIGHT)
 	if facing_right:
-		return true
+		return
 
 	animation_tree.set('parameters/turn_right/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	facing_right = true
-	return true

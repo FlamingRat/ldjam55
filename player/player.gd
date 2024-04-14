@@ -9,30 +9,38 @@ enum PlayerState {
 
 
 @export var skelvin: PackedScene
+@export var movement_speed: int = 3
+@export var mana: int = 1
 @onready var movement := $CharacterMovementController
 @onready var summons := $SummonController
-var turn_actions = false
-var action_lock = false
 var player_state = PlayerState.WALKING
+var steps_available = movement_speed
+var current_mana = mana
+
+
+var turn_actions: bool:
+	get:
+		return GlobalEvents.current_turn_unit == self
 
 
 var actions = {
-	"ui_up": func(): return movement.move(Vector3.FORWARD),
-	"ui_down": func(): return movement.move(Vector3.BACK),
-	"ui_left": func(): return movement.move_left(),
-	"ui_right": func(): return movement.move_right(),
+	"ui_up": move_up,
+	"ui_down": move_down,
+	"ui_left": move_left,
+	"ui_right": move_right,
 	"ui_accept": start_summon,
+	"end_turn": end_turn,
 }
 
 
 func _process(_delta):
-	action_lock = false
-	if turn_actions and player_state == PlayerState.WALKING:
+	if GlobalEvents.current_turn_unit == self:
 		turn_input_listener()
 
 
 func _on_character_turn_listener_on_turn():
-	turn_actions = true
+	steps_available = movement_speed
+	current_mana = mana
 
 
 func turn_input_listener():
@@ -40,16 +48,15 @@ func turn_input_listener():
 		if not Input.is_action_just_pressed(action):
 			continue
 
-		action_lock = true
-		var done = actions[action].call()
-		if done:
-			end_turn()
+		actions[action].call()
 
 
 func start_summon():
+	if not current_mana or player_state != PlayerState.WALKING:
+		return
+
 	player_state = PlayerState.SUMMONING
 	summons.start_summon(Vector3.RIGHT if movement.facing_right else Vector3.LEFT)
-	return false
 
 
 func summon(pos: Vector3):
@@ -57,9 +64,40 @@ func summon(pos: Vector3):
 	var inst_skelvin: Skelvin = skelvin.instantiate()
 	get_parent().add_child(inst_skelvin)
 	inst_skelvin.global_position = pos
-	end_turn()
+	current_mana -= 1
+
+
+func move_up():
+	if not steps_available or player_state != PlayerState.WALKING:
+		return
+
+	movement.move(Vector3.FORWARD)
+	steps_available -= 1
+
+
+func move_down():
+	if not steps_available or player_state != PlayerState.WALKING:
+		return
+
+	movement.move(Vector3.BACK)
+	steps_available -= 1
+
+
+func move_left():
+	if not steps_available or player_state != PlayerState.WALKING:
+		return
+
+	movement.move_left()
+	steps_available -= 1
+
+
+func move_right():
+	if not steps_available or player_state != PlayerState.WALKING:
+		return
+
+	movement.move_right()
+	steps_available -= 1
 
 
 func end_turn():
-	turn_actions = false
 	GlobalEvents.end_turn()

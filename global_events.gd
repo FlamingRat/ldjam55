@@ -11,6 +11,9 @@ const TURN_TIME: float = 5
 var timer = TURN_TIME
 var units = []
 var current_turn: int = 0
+var current_turn_unit: Node3D:
+	get:
+		return units[current_turn]
 
 
 func end_turn():
@@ -19,10 +22,8 @@ func end_turn():
 		current_turn = 0
 
 	await get_tree().create_timer(0.5).timeout
-	print(units[current_turn])
 	next_turn.emit(units[current_turn])
 
 
 func register_unit(unit):
 	units.append(unit)
-	next_turn.emit(units[current_turn])

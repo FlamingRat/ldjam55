@@ -1,0 +1,42 @@
+[gd_scene load_steps=10 format=3 uid="uid://tq2rmvx4gyfm"]
+
+[ext_resource type="Script" path="res://player/movement_range_indicator.gd" id="1_12t7v"]
+
+[sub_resource type="Gradient" id="Gradient_ohqyi"]
+colors = PackedColorArray(0.485703, 0.485704, 0.485703, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bwpmf"]
+gradient = SubResource("Gradient_ohqyi")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4582r"]
+frequency = 0.0478
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j7fjc"]
+noise = SubResource("FastNoiseLite_4582r")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pceye"]
+frequency = 0.0206
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8htny"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_pceye")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ihtag"]
+albedo_color = Color(0.623529, 0.00784314, 0, 1)
+albedo_texture = SubResource("GradientTexture1D_bwpmf")
+metallic = 1.0
+metallic_texture = SubResource("NoiseTexture2D_j7fjc")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_8htny")
+
+[sub_resource type="TorusMesh" id="TorusMesh_0n0t8"]
+material = SubResource("StandardMaterial3D_ihtag")
+inner_radius = 0.95
+rings = 12
+ring_segments = 3
+
+[node name="MovementRangeIndicator" type="Node3D"]
+script = ExtResource("1_12t7v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_0n0t8")

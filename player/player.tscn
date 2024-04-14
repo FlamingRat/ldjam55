@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7biv641mnrue"]
+[gd_scene load_steps=14 format=3 uid="uid://c7biv641mnrue"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_armax"]
 [ext_resource type="PackedScene" uid="uid://ccwhs1dn3tpvv" path="res://ui/summon_indicator.tscn" id="2_3inrr"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://common/character_movement_controller.gd" id="5_aaepl"]
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="6_ofdec"]
 [ext_resource type="Script" path="res://player/summon_controller.gd" id="8_v5af1"]
+[ext_resource type="PackedScene" uid="uid://tq2rmvx4gyfm" path="res://player/movement_range_indicator.tscn" id="10_gppho"]
 
 [sub_resource type="Animation" id="Animation_5nbwj"]
 length = 0.001
@@ -94,7 +95,7 @@ billboard = 1
 no_depth_test = true
 alpha_scissor_threshold = 0.0
 texture_filter = 0
-render_priority = 1
+render_priority = 2
 texture = ExtResource("2_wkwxg")
 hframes = 2
 
@@ -129,5 +130,7 @@ script = ExtResource("6_ofdec")
 [node name="SummonController" type="Node" parent="."]
 script = ExtResource("8_v5af1")
 summon_indicator = ExtResource("2_3inrr")
+
+[node name="MovementRangeIndicator" parent="." instance=ExtResource("10_gppho")]
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
