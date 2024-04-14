@@ -10,7 +10,7 @@ func _ready():
 	GlobalEvents.next_turn_announced.connect(focus)
 	
 	
-func _process(delta):
+func _process(_delta):
 	if follow and not follow.is_queued_for_deletion():
 		global_position = default_position + follow.global_position
 
@@ -34,6 +34,8 @@ func focus(unit: Node3D):
 	allow_next_turn(unit)
 
 
-func allow_next_turn(unit: Node3D):
-	follow = unit
+func allow_next_turn(unit = null):
+	if unit and not unit.is_queued_for_deletion():
+		follow = unit
+
 	GlobalEvents.start_turn()

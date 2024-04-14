@@ -4,7 +4,7 @@ extends Sprite3D
 @export var health: Health
 
 
-func _process(delta):
+func _process(_delta):
 	var percent = health.percent
 	if percent != (texture as GradientTexture2D).width:
 		var tween = create_tween()

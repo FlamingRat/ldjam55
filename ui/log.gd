@@ -16,5 +16,5 @@ func announce_turn(unit: Node3D):
 	set_caret_line(get_line_count())
 
 
-func announce_attack(attacker: AttackRange, target: Health):
+func announce_attack(attacker, target):
 	text += '\n' + attacker.get_parent().name + ' attacks ' + target.get_parent().name + '!'

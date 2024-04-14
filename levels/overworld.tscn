@@ -42,7 +42,7 @@ environment = SubResource("Environment_knx1d")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 script = ExtResource("3_r3tab")
 spawn = ExtResource("3_qrpkt")
-spawn_cooldown = 5
+spawn_cooldown = 2
 
 [node name="CharacterTurnListener" type="Node" parent="Spawner"]
 script = ExtResource("5_6jcuj")

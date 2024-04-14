@@ -13,7 +13,7 @@ var faction_self: Alignment.Faction:
 
 
 func _on_character_turn_listener_on_turn():
-	var attack_success = attack_range.attack_any()
+	var attack_success = await attack_range.attack_any()
 	if attack_success:
 		GlobalEvents.end_turn()
 		return
@@ -21,8 +21,8 @@ func _on_character_turn_listener_on_turn():
 	for area in sight.get_overlapping_areas():
 		var body = area.get_parent()
 		print('detected ', body)
-		var alignment: Alignment = body.get_node('Alignment')
-		if not alignment or alignment.faction != faction_self:
+		var opp_alignment: Alignment = body.get_node('Alignment')
+		if not opp_alignment or opp_alignment.faction != faction_self:
 			var dir: Vector3 = (body.global_position - global_position).normalized()
 			print(dir)
 			var is_x = abs(dir.x) > abs(dir.z)

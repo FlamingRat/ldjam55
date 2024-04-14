@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://caut86utiy4sd"]
+[gd_scene load_steps=23 format=3 uid="uid://caut86utiy4sd"]
 
 [ext_resource type="Texture2D" uid="uid://co7ave47yxtfx" path="res://summons/skelvin.png" id="1_2lu46"]
 [ext_resource type="Script" path="res://enemies/badgy.gd" id="1_48qu0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b0dsum4kcwukr" path="res://common/health_bar.tscn" id="8_d4p1b"]
 [ext_resource type="Script" path="res://common/wander_movement.gd" id="9_rqgoq"]
 [ext_resource type="AnimationLibrary" uid="uid://c8p2e6fnke5r8" path="res://common/character_turns.res" id="10_gf6bf"]
+[ext_resource type="Animation" uid="uid://6bj6lt8u47df" path="res://common/take_damage_animation.res" id="10_k5ti6"]
 [ext_resource type="PackedScene" uid="uid://j42lyhv85siv" path="res://common/hitbox.tscn" id="11_57mp8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6ve58"]
@@ -40,6 +41,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.74902, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_07qny"]
@@ -72,7 +85,8 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t4323"]
 _data = {
 "RESET": SubResource("Animation_hkdjy"),
-"idle": SubResource("Animation_07qny")
+"idle": SubResource("Animation_07qny"),
+"take_damage_animation": ExtResource("10_k5ti6")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbi1q"]
@@ -89,7 +103,7 @@ animation = &"idle"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_alh3q"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_evm8g"]
-graph_offset = Vector2(-439.542, 31.4707)
+graph_offset = Vector2(-270.582, 29.5507)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_wp18d")
 nodes/Animation/position = Vector2(-480, 340)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_wbi1q")
@@ -107,7 +121,7 @@ script = ExtResource("1_48qu0")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-modulate = Color(1, 0.694118, 0, 1)
+modulate = Color(1, 0.74902, 0, 1)
 pixel_size = 0.0625
 billboard = 1
 texture_filter = 0
@@ -129,10 +143,10 @@ animation_tree = NodePath("../AnimationTree")
 
 [node name="AttackRange" parent="." instance=ExtResource("5_mrubn")]
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("5_mbu46")
 max_health = 5
-current_health = 5
+animation_tree = NodePath("../AnimationTree")
 
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("7_didlj")
@@ -160,7 +174,6 @@ parameters/turn_right/internal_active = false
 parameters/turn_right/request = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-active = false
 libraries = {
 "": SubResource("AnimationLibrary_t4323"),
 "character_turns": ExtResource("10_gf6bf")

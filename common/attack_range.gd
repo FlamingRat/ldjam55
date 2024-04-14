@@ -2,6 +2,7 @@ extends Area3D
 class_name AttackRange
 
 
+@export var animator: AnimationTree
 @export var attack_damage: int = 5
 var faction_self: Alignment.Faction:
 	get:
@@ -22,9 +23,13 @@ func attack_any():
 		if not (health is Health):
 			continue
 
-		print('Attacking ', body)
-		health.damage(attack_damage)
 		GlobalEvents.attack.emit(self, health)
+		health.damage(attack_damage)
+
+		if animator:
+			animator.set('parameters/attack/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+			await get_tree().create_timer(1).timeout
+
 		return true
 
 	return false
