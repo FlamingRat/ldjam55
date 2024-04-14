@@ -5,6 +5,7 @@ class_name Badgy
 @onready var sight := $Sight
 @onready var attack_range := $AttackRange
 @onready var movement := $CharacterMovementController
+@onready var wander := $WanderMovement
 
 
 func _on_character_turn_listener_on_turn():
@@ -26,6 +27,7 @@ func _on_character_turn_listener_on_turn():
 		GlobalEvents.end_turn()
 		return
 
+	wander.rand()
 	GlobalEvents.end_turn()
 
 

@@ -2,23 +2,16 @@ extends Node3D
 class_name Skelvin
 
 
-@onready var movement := $CharacterMovementController
+@onready var movement := $WanderMovement
 @onready var attack_range := $AttackRange
 
 
-var actions = {
-	1: func(): movement.move_right(),
-	2: func(): movement.move_left(),
-	3: func(): movement.move(Vector3.FORWARD),
-	4: func(): movement.move(Vector3.BACK),
-}
-
-
 func _on_character_turn_listener_on_turn():
-	var dir = randi_range(1, 4)
-	actions[dir].call()
-	attack_range.attack_any()
+	var attack_success = attack_range.attack_any()
+	if attack_success:
+		GlobalEvents.end_turn()
 
+	movement.rand()
 	GlobalEvents.end_turn()
 
 
