@@ -1,7 +1,8 @@
 extends Node
 
 
-signal next_turn
+signal next_turn(unit: Node3D)
+signal next_turn_announced(unit: Node3D)
 signal attack(attacker: AttackRange, health: Health)
 
 
@@ -22,9 +23,11 @@ var current_turn_unit: Node3D:
 func end_turn():
 	current_turn += 1
 
-	await get_tree().create_timer(0.5).timeout
-	print(current_turn_unit)
-	next_turn.emit(current_turn_unit)
+	next_turn_announced.emit(current_turn_unit)
+
+
+func start_turn():
+	next_turn.emit(current_turn_unit)	
 
 
 func register_unit(unit: Node3D):

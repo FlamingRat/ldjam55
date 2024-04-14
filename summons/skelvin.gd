@@ -8,11 +8,9 @@ class_name Skelvin
 
 func _on_character_turn_listener_on_turn():
 	var attack_success = attack_range.attack_any()
-	if attack_success:
-		GlobalEvents.end_turn()
-		return
+	if not attack_success:
+		movement.rand()
 
-	movement.rand()
 	GlobalEvents.end_turn()
 
 

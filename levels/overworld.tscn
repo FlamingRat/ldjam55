@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=11 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
 [ext_resource type="Texture2D" uid="uid://dxqyj6coi7fmi" path="res://levels/grid.png" id="2_jwiha"]
+[ext_resource type="Script" path="res://levels/camera.gd" id="3_mka4u"]
 [ext_resource type="PackedScene" uid="uid://caut86utiy4sd" path="res://enemies/badgy.tscn" id="3_qrpkt"]
 [ext_resource type="Script" path="res://enemies/spawner.gd" id="3_r3tab"]
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="5_6jcuj"]
@@ -32,6 +33,7 @@ texture = ExtResource("2_jwiha")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, -6.34496e-16, 2.00056e-16, 2.00056e-16, 0.573576, 0.819152, -6.34496e-16, -0.819152, 0.573576, 2.08165e-12, 11, 7.5)
+script = ExtResource("3_mka4u")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_knx1d")

@@ -11,12 +11,12 @@ width = 16
 height = 2
 fill_to = Vector2(0, 1)
 
-[node name="HealthBar" type="Node3D"]
-script = ExtResource("1_jbfsw")
-
-[node name="HealthBarFill" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-pixel_size = 0.0625
+[node name="HealthBar" type="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+offset = Vector2(2.08165e-12, -8)
+pixel_size = 0.005
 billboard = 1
+fixed_size = true
 render_priority = 6
 texture = SubResource("GradientTexture2D_kwm6a")
+script = ExtResource("1_jbfsw")
