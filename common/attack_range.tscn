@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvapfrkrrhhyn"]
+[gd_scene load_steps=4 format=3 uid="uid://dvapfrkrrhhyn"]
 
 [ext_resource type="Script" path="res://common/attack_range.gd" id="1_4bs2p"]
+[ext_resource type="AudioStream" uid="uid://bclqetp2jnhwg" path="res://ui/sound/sfx_hit.wav" id="2_j1rmc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0o03n"]
 radius = 1.25
@@ -10,3 +11,7 @@ script = ExtResource("1_4bs2p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_0o03n")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_j1rmc")
+pitch_scale = 2.19

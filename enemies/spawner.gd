@@ -29,5 +29,5 @@ func spawn_units():
 	for i in spawn_per_turn:
 		var inst = spawn.instantiate()
 		get_parent().add_child(inst)
-		var randpos = Vector3(randi_range(0, spawn_range), 0, randi_range(0, spawn_range))
+		var randpos = Vector3(randi_range(-spawn_range, spawn_range), 0, randi_range(-spawn_range, spawn_range))
 		inst.global_position = global_position + randpos

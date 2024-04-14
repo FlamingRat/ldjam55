@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bo0cwffonwbgn"]
+[gd_scene load_steps=20 format=3 uid="uid://bo0cwffonwbgn"]
 
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="1_cttst"]
 [ext_resource type="Script" path="res://summons/skelvin.gd" id="1_fve1f"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" path="res://common/alignment.gd" id="9_3p48q"]
 [ext_resource type="PackedScene" uid="uid://b0dsum4kcwukr" path="res://common/health_bar.tscn" id="10_fedya"]
 [ext_resource type="Script" path="res://common/wander_movement.gd" id="11_rmct2"]
+[ext_resource type="AudioStream" uid="uid://dra1tmh1t2uq7" path="res://ui/sound/sfx_death.wav" id="16_tjg27"]
+[ext_resource type="AudioStream" uid="uid://cvx1yc21fp8co" path="res://ui/sound/sfx_step.wav" id="17_u0i0f"]
 
 [sub_resource type="Animation" id="Animation_yp3mn"]
 length = 0.001
@@ -113,18 +115,20 @@ parameters/turn_right/active = false
 parameters/turn_right/internal_active = false
 parameters/turn_right/request = 0
 
-[node name="CharacterMovementController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree", "collision_detector")]
+[node name="CharacterMovementController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree", "collision_detector", "sfx")]
 script = ExtResource("5_rnxha")
 animation_tree = NodePath("../AnimationTree")
 collision_detector = NodePath("../CollisionDetector")
+sfx = NodePath("../StepSFX")
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("1_cttst")
 
-[node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "sfx")]
 script = ExtResource("7_bempt")
 max_health = 6
 animation_tree = NodePath("../AnimationTree")
+sfx = NodePath("../DeathSFX")
 
 [node name="Hitbox" parent="." instance=ExtResource("8_xw1il")]
 
@@ -146,6 +150,14 @@ movement_controller = NodePath("../CharacterMovementController")
 target_position = Vector3(1, 0, 0)
 hit_from_inside = true
 collide_with_areas = true
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_tjg27")
+pitch_scale = 1.3
+
+[node name="StepSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_u0i0f")
+pitch_scale = 3.43
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

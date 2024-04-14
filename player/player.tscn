@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c7biv641mnrue"]
+[gd_scene load_steps=22 format=3 uid="uid://c7biv641mnrue"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_armax"]
 [ext_resource type="PackedScene" uid="uid://ccwhs1dn3tpvv" path="res://ui/summon_indicator.tscn" id="2_3inrr"]
@@ -15,6 +15,9 @@
 [ext_resource type="Script" path="res://common/alignment.gd" id="12_mmwt1"]
 [ext_resource type="PackedScene" uid="uid://b0dsum4kcwukr" path="res://common/health_bar.tscn" id="13_clpif"]
 [ext_resource type="PackedScene" uid="uid://j42lyhv85siv" path="res://common/hitbox.tscn" id="15_0nusf"]
+[ext_resource type="AudioStream" uid="uid://cyspvia8ywy55" path="res://ui/sound/sfx_summon.mp3" id="16_qdx5m"]
+[ext_resource type="AudioStream" uid="uid://75gjnwy82jhh" path="res://ui/sound/sfx_turn_start.mp3" id="17_4ptu4"]
+[ext_resource type="AudioStream" uid="uid://cvx1yc21fp8co" path="res://ui/sound/sfx_step.wav" id="18_ygnnl"]
 
 [sub_resource type="Animation" id="Animation_5nbwj"]
 length = 0.001
@@ -146,24 +149,27 @@ parameters/turn_right/active = false
 parameters/turn_right/internal_active = false
 parameters/turn_right/request = 0
 
-[node name="CharacterMovementController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree", "collision_detector")]
+[node name="CharacterMovementController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree", "collision_detector", "sfx")]
 script = ExtResource("5_aaepl")
 animation_tree = NodePath("../AnimationTree")
 collision_detector = NodePath("../CollisionDetector")
+sfx = NodePath("../StepSFX")
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("6_ofdec")
 
-[node name="SummonController" type="Node" parent="."]
+[node name="SummonController" type="Node" parent="." node_paths=PackedStringArray("sfx")]
 script = ExtResource("8_v5af1")
 summon_indicator = ExtResource("2_3inrr")
+sfx = NodePath("../SummonSFX")
 
 [node name="MovementRangeIndicator" parent="." instance=ExtResource("10_gppho")]
 
-[node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "sfx")]
 script = ExtResource("11_ghche")
 max_health = 15
 animation_tree = NodePath("../AnimationTree")
+sfx = NodePath("../DeathSFX")
 
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("12_mmwt1")
@@ -177,6 +183,20 @@ health = NodePath("../Health")
 target_position = Vector3(1, 0, 0)
 hit_from_inside = true
 collide_with_areas = true
+
+[node name="SummonSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_qdx5m")
+pitch_scale = 0.71
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="."]
+
+[node name="NotifySFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_4ptu4")
+pitch_scale = 0.6
+
+[node name="StepSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_ygnnl")
+pitch_scale = 3.43
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

@@ -12,6 +12,7 @@ var summon_controls = {
 
 
 @export var summon_indicator: PackedScene
+@export var sfx: AudioStreamPlayer
 @onready var player: Player = get_parent()
 var indicator: Node3D
 var frame_lock = false
@@ -73,3 +74,4 @@ func confirm_summon():
 	player.summon(player.global_position + indicator.position)
 	indicator.queue_free()
 	indicator = null
+	sfx.play()

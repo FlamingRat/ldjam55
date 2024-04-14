@@ -4,6 +4,7 @@ class_name AttackRange
 
 @export var animator: AnimationTree
 @export var attack_damage: int = 5
+@onready var hit_sound := $AudioStreamPlayer
 var faction_self: Alignment.Faction:
 	get:
 		return get_parent().get_node('Alignment').faction
@@ -25,6 +26,7 @@ func attack_any():
 
 		GlobalEvents.attack.emit(self, health)
 		health.damage(attack_damage)
+		hit_sound.play()
 
 		if animator:
 			animator.set('parameters/attack/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

@@ -8,6 +8,7 @@ signal health_depleted
 
 @export var max_health: int = 10
 @export var animation_tree: AnimationTree
+@export var sfx: AudioStreamPlayer
 @onready var current_health: int = max_health
 var percent: float:
 	get:
@@ -22,4 +23,7 @@ func damage(hit: int):
 	damaged.emit(hit)
 	if current_health <= 0:
 		current_health = 0
+		if sfx:
+			sfx.play()
+			await get_tree().create_timer(.5).timeout
 		health_depleted.emit()

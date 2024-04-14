@@ -4,6 +4,7 @@ class_name CharacterMovementController
 
 @export var animation_tree: AnimationTree
 @export var collision_detector: RayCast3D
+@export var sfx: AudioStreamPlayer
 var facing_right = true
 var moving_direction = Vector3.ZERO
 
@@ -34,6 +35,9 @@ func move(dir: Vector3) -> void:
 	if not movement_allowed(dir):
 		return
 
+	if sfx:
+		sfx.play()
+
 	snap_to_grid()
 	moving_direction = dir
 	move_tween.tween_property(parent, "global_position", parent.global_position + dir, 0.3)
@@ -47,6 +51,9 @@ func move(dir: Vector3) -> void:
 		facing_right = true
 
 	await get_tree().create_timer(.5).timeout
+
+	if sfx:
+		sfx.stop()
 
 
 func movement_allowed(direction: Vector3):
