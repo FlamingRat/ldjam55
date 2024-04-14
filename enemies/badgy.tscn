@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://caut86utiy4sd"]
+[gd_scene load_steps=25 format=3 uid="uid://caut86utiy4sd"]
 
 [ext_resource type="Texture2D" uid="uid://co7ave47yxtfx" path="res://summons/skelvin.png" id="1_2lu46"]
 [ext_resource type="Script" path="res://enemies/badgy.gd" id="1_48qu0"]
@@ -98,23 +98,33 @@ animation = &"character_turns/turn left"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_31xko"]
 animation = &"idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4h1aa"]
+animation = &"take_damage_animation"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_0scsa"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_qnwqe"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_alh3q"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_evm8g"]
-graph_offset = Vector2(-270.582, 29.5507)
+graph_offset = Vector2(-406.713, 96.6954)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_wp18d")
 nodes/Animation/position = Vector2(-480, 340)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_wbi1q")
 "nodes/Animation 2/position" = Vector2(-260, 440)
 nodes/idle/node = SubResource("AnimationNodeAnimation_31xko")
 nodes/idle/position = Vector2(-562.375, 159.461)
+nodes/output/position = Vector2(620, 260)
+"nodes/take damage anim/node" = SubResource("AnimationNodeAnimation_4h1aa")
+"nodes/take damage anim/position" = Vector2(180, 400)
+nodes/take_damage/node = SubResource("AnimationNodeOneShot_0scsa")
+nodes/take_damage/position = Vector2(435.3, 268.465)
 nodes/turn_left/node = SubResource("AnimationNodeOneShot_qnwqe")
 nodes/turn_left/position = Vector2(-200, 100)
 nodes/turn_right/node = SubResource("AnimationNodeOneShot_alh3q")
 nodes/turn_right/position = Vector2(26.058, 197.254)
-node_connections = [&"output", 0, &"turn_right", &"turn_left", 0, &"idle", &"turn_left", 1, &"Animation", &"turn_right", 0, &"turn_left", &"turn_right", 1, &"Animation 2"]
+node_connections = [&"output", 0, &"take_damage", &"take_damage", 0, &"turn_right", &"take_damage", 1, &"take damage anim", &"turn_left", 0, &"idle", &"turn_left", 1, &"Animation", &"turn_right", 0, &"turn_left", &"turn_right", 1, &"Animation 2"]
 
 [node name="Badgy" type="Node3D"]
 script = ExtResource("1_48qu0")
@@ -137,9 +147,13 @@ script = ExtResource("3_drbww")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sight"]
 shape = SubResource("SphereShape3D_6ve58")
 
-[node name="CharacterMovementController" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
+[node name="CharacterMovementController" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "collision_detector")]
 script = ExtResource("4_ibw8w")
 animation_tree = NodePath("../AnimationTree")
+collision_detector = NodePath("CollisionDetector")
+
+[node name="CollisionDetector" type="RayCast3D" parent="CharacterMovementController"]
+collide_with_areas = true
 
 [node name="AttackRange" parent="." instance=ExtResource("5_mrubn")]
 
@@ -166,6 +180,9 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeBlendTree_evm8g")
 anim_player = NodePath("../AnimationPlayer")
+parameters/take_damage/active = false
+parameters/take_damage/internal_active = false
+parameters/take_damage/request = 0
 parameters/turn_left/active = false
 parameters/turn_left/internal_active = false
 parameters/turn_left/request = 0

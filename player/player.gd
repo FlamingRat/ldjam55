@@ -14,6 +14,7 @@ enum PlayerState {
 @export var summon_range: int = 2
 @onready var movement := $CharacterMovementController
 @onready var summons := $SummonController
+@onready var collision_detector := $CollisionDetector
 var player_state = PlayerState.WALKING
 var steps_available = movement_speed
 var current_mana = mana
@@ -72,12 +73,18 @@ func move_up():
 	if not steps_available or player_state != PlayerState.WALKING:
 		return
 
+	if not movement.movement_allowed(Vector3.FORWARD):
+		return
+
 	movement.move(Vector3.FORWARD)
 	steps_available -= 1
 
 
 func move_down():
 	if not steps_available or player_state != PlayerState.WALKING:
+		return
+
+	if not movement.movement_allowed(Vector3.BACK):
 		return
 
 	movement.move(Vector3.BACK)
@@ -88,12 +95,18 @@ func move_left():
 	if not steps_available or player_state != PlayerState.WALKING:
 		return
 
+	if not movement.movement_allowed(Vector3.LEFT):
+		return
+
 	movement.move(Vector3.LEFT)
 	steps_available -= 1
 
 
 func move_right():
 	if not steps_available or player_state != PlayerState.WALKING:
+		return
+
+	if not movement.movement_allowed(Vector3.RIGHT):
 		return
 
 	movement.move(Vector3.RIGHT)

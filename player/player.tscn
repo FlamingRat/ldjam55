@@ -143,9 +143,10 @@ parameters/turn_right/active = false
 parameters/turn_right/internal_active = false
 parameters/turn_right/request = 0
 
-[node name="CharacterMovementController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree")]
+[node name="CharacterMovementController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree", "collision_detector")]
 script = ExtResource("5_aaepl")
 animation_tree = NodePath("../AnimationTree")
+collision_detector = NodePath("../CollisionDetector")
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("6_ofdec")
@@ -168,6 +169,11 @@ script = ExtResource("12_mmwt1")
 health = NodePath("../Health")
 
 [node name="Hitbox" parent="." instance=ExtResource("15_0nusf")]
+
+[node name="CollisionDetector" type="RayCast3D" parent="."]
+target_position = Vector3(1, 0, 0)
+hit_from_inside = true
+collide_with_areas = true
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
