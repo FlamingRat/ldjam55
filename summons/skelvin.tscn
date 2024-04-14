@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://common/character_movement_controller.gd" id="5_rnxha"]
 [ext_resource type="Script" path="res://common/health.gd" id="7_bempt"]
 [ext_resource type="PackedScene" uid="uid://dvapfrkrrhhyn" path="res://common/attack_range.tscn" id="8_sf5pn"]
+[ext_resource type="PackedScene" uid="uid://j42lyhv85siv" path="res://common/hitbox.tscn" id="8_xw1il"]
 [ext_resource type="Script" path="res://common/alignment.gd" id="9_3p48q"]
 [ext_resource type="PackedScene" uid="uid://b0dsum4kcwukr" path="res://common/health_bar.tscn" id="10_fedya"]
 [ext_resource type="Script" path="res://common/wander_movement.gd" id="11_rmct2"]
@@ -62,8 +63,6 @@ _data = {
 "idle": SubResource("Animation_1vptp")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_isdkp"]
-
 [node name="Skelvin" type="Node3D"]
 script = ExtResource("1_fve1f")
 
@@ -109,10 +108,7 @@ script = ExtResource("7_bempt")
 max_health = 5
 current_health = 5
 
-[node name="Hitbox" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
-shape = SubResource("BoxShape3D_isdkp")
+[node name="Hitbox" parent="." instance=ExtResource("8_xw1il")]
 
 [node name="AttackRange" parent="." instance=ExtResource("8_sf5pn")]
 attack_damage = 3

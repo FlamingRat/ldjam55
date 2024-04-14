@@ -10,17 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://b0dsum4kcwukr" path="res://common/health_bar.tscn" id="8_d4p1b"]
 [ext_resource type="Script" path="res://common/wander_movement.gd" id="9_rqgoq"]
 [ext_resource type="AnimationLibrary" uid="uid://c8p2e6fnke5r8" path="res://common/character_turns.res" id="10_gf6bf"]
+[ext_resource type="PackedScene" uid="uid://j42lyhv85siv" path="res://common/hitbox.tscn" id="11_57mp8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6ve58"]
 radius = 8.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jljbj"]
-
-[sub_resource type="Animation" id="Animation_07qny"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_hkdjy"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite3D:flip_h")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -43,11 +42,11 @@ tracks/1/keys = {
 "values": [Vector3(1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_hkdjy"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_07qny"]
+resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("Sprite3D:flip_h")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -135,11 +134,6 @@ script = ExtResource("5_mbu46")
 max_health = 5
 current_health = 5
 
-[node name="Hitbox" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
-shape = SubResource("BoxShape3D_jljbj")
-
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("7_didlj")
 faction = 1
@@ -171,6 +165,8 @@ libraries = {
 "": SubResource("AnimationLibrary_t4323"),
 "character_turns": ExtResource("10_gf6bf")
 }
+
+[node name="Hitbox" parent="." instance=ExtResource("11_57mp8")]
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

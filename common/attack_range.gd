@@ -10,7 +10,7 @@ var faction_self: Alignment.Faction:
 func attack_any():
 	for area in get_overlapping_areas():
 		var body = area.get_parent()
-		if body == self:
+		if body == self or not (area is Hitbox):
 			continue
 
 		var alignment: Alignment = body.get_node('Alignment')
