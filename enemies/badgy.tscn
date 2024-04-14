@@ -159,6 +159,7 @@ hit_from_inside = true
 collide_with_areas = true
 
 [node name="AttackRange" parent="." instance=ExtResource("5_mrubn")]
+attack_damage = 3
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("5_mbu46")

@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="5_6jcuj"]
 [ext_resource type="Script" path="res://ui/log.gd" id="6_c8um8"]
 [ext_resource type="Texture2D" uid="uid://c4hnbbj2m6iaj" path="res://ui/vamper_walls.png" id="9_5nfgd"]
-[ext_resource type="Texture2D" uid="uid://kt057pvlb8b2" path="res://ui/vamper-tiles.png" id="9_p8bsw"]
+[ext_resource type="Texture2D" uid="uid://kt057pvlb8b2" path="res://ui/vampetiles.png" id="9_p8bsw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5vxg"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
