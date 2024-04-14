@@ -15,4 +15,4 @@ var actions = {
 
 func rand():
 	var dir = randi_range(1, 4)
-	actions[dir].call()
+	await actions[dir].call()

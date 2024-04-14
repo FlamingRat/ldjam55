@@ -18,3 +18,5 @@ func move(dir: Vector3) -> void:
 	if dir.x > 0 and not facing_right:
 		animation_tree.set('parameters/turn_right/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		facing_right = true
+
+	await get_tree().create_timer(.5).timeout

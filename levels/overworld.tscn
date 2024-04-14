@@ -32,7 +32,7 @@ texture = ExtResource("2_jwiha")
 [node name="Player" parent="." instance=ExtResource("2_7cvbh")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, -6.34496e-16, 2.00056e-16, 2.00056e-16, 0.573576, 0.819152, -6.34496e-16, -0.819152, 0.573576, 2.08165e-12, 11, 7.5)
+transform = Transform3D(1, -6.76539e-16, 1.19292e-16, 1.19292e-16, 0.34202, 0.939692, -6.76539e-16, -0.939692, 0.34202, 2.08165e-12, 8, 4)
 script = ExtResource("3_mka4u")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
