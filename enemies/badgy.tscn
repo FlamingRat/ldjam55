@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://caut86utiy4sd"]
+
+[ext_resource type="Texture2D" uid="uid://co7ave47yxtfx" path="res://summons/skelvin.png" id="1_2lu46"]
+[ext_resource type="Script" path="res://enemies/badgy.gd" id="1_48qu0"]
+[ext_resource type="Script" path="res://common/character_turn_listener.gd" id="3_drbww"]
+[ext_resource type="Script" path="res://common/character_movement_controller.gd" id="4_ibw8w"]
+[ext_resource type="Script" path="res://common/health.gd" id="5_mbu46"]
+[ext_resource type="PackedScene" uid="uid://dvapfrkrrhhyn" path="res://common/attack_range.tscn" id="5_mrubn"]
+[ext_resource type="Script" path="res://common/alignment.gd" id="7_didlj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6ve58"]
+radius = 4.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jljbj"]
+
+[node name="Badgy" type="Node3D"]
+script = ExtResource("1_48qu0")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+modulate = Color(1, 0.694118, 0, 1)
+pixel_size = 0.0625
+billboard = 1
+texture_filter = 0
+render_priority = 2
+texture = ExtResource("1_2lu46")
+hframes = 6
+
+[node name="CharacterTurnListener" type="Node" parent="."]
+script = ExtResource("3_drbww")
+
+[node name="Sight" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sight"]
+shape = SubResource("SphereShape3D_6ve58")
+
+[node name="CharacterMovementController" type="Node" parent="."]
+script = ExtResource("4_ibw8w")
+
+[node name="AttackRange" parent="." instance=ExtResource("5_mrubn")]
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("5_mbu46")
+max_health = 5
+current_health = 5
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("BoxShape3D_jljbj")
+
+[node name="Alignment" type="Node" parent="."]
+script = ExtResource("7_didlj")
+faction = 1
+
+[connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

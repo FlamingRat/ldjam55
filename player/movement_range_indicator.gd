@@ -11,7 +11,7 @@ func _process(_delta):
 
 	var mesh: TorusMesh = indicator.mesh
 	var can_walk = parent.steps_available and parent.turn_actions
-	var radius = parent.steps_available + 0.5 if can_walk else 0
+	var radius = parent.steps_available + 0.5 if can_walk else 0.0
 	
 	if radius == mesh.outer_radius:
 		return

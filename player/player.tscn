@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7biv641mnrue"]
+[gd_scene load_steps=17 format=3 uid="uid://c7biv641mnrue"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_armax"]
 [ext_resource type="PackedScene" uid="uid://ccwhs1dn3tpvv" path="res://ui/summon_indicator.tscn" id="2_3inrr"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="6_ofdec"]
 [ext_resource type="Script" path="res://player/summon_controller.gd" id="8_v5af1"]
 [ext_resource type="PackedScene" uid="uid://tq2rmvx4gyfm" path="res://player/movement_range_indicator.tscn" id="10_gppho"]
+[ext_resource type="Script" path="res://common/health.gd" id="11_ghche"]
+[ext_resource type="Script" path="res://common/alignment.gd" id="12_mmwt1"]
 
 [sub_resource type="Animation" id="Animation_5nbwj"]
 length = 0.001
@@ -84,6 +86,8 @@ _data = {
 "idle": SubResource("Animation_5bwoh")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8k76w"]
+
 [node name="Player" type="Node3D"]
 script = ExtResource("1_armax")
 skelvin = ExtResource("2_uva74")
@@ -132,5 +136,18 @@ script = ExtResource("8_v5af1")
 summon_indicator = ExtResource("2_3inrr")
 
 [node name="MovementRangeIndicator" parent="." instance=ExtResource("10_gppho")]
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("BoxShape3D_8k76w")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("11_ghche")
+max_health = 15
+current_health = 15
+
+[node name="Alignment" type="Node" parent="."]
+script = ExtResource("12_mmwt1")
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]

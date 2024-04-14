@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bo0cwffonwbgn"]
+[gd_scene load_steps=14 format=3 uid="uid://bo0cwffonwbgn"]
 
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="1_cttst"]
 [ext_resource type="Script" path="res://summons/skelvin.gd" id="1_fve1f"]
@@ -6,6 +6,9 @@
 [ext_resource type="AnimationLibrary" uid="uid://c8p2e6fnke5r8" path="res://common/character_turns.res" id="2_2agrm"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://bs7rbmyb11p53" path="res://common/character_animations.tres" id="3_65y5x"]
 [ext_resource type="Script" path="res://common/character_movement_controller.gd" id="5_rnxha"]
+[ext_resource type="Script" path="res://common/health.gd" id="7_bempt"]
+[ext_resource type="PackedScene" uid="uid://dvapfrkrrhhyn" path="res://common/attack_range.tscn" id="8_sf5pn"]
+[ext_resource type="Script" path="res://common/alignment.gd" id="9_3p48q"]
 
 [sub_resource type="Animation" id="Animation_yp3mn"]
 length = 0.001
@@ -57,6 +60,8 @@ _data = {
 "idle": SubResource("Animation_1vptp")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_isdkp"]
+
 [node name="Skelvin" type="Node3D"]
 script = ExtResource("1_fve1f")
 
@@ -97,4 +102,21 @@ animation_tree = NodePath("../AnimationTree")
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("1_cttst")
 
+[node name="Health" type="Node" parent="."]
+script = ExtResource("7_bempt")
+max_health = 5
+current_health = 5
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("BoxShape3D_isdkp")
+
+[node name="AttackRange" parent="." instance=ExtResource("8_sf5pn")]
+attack_damage = 3
+
+[node name="Alignment" type="Node" parent="."]
+script = ExtResource("9_3p48q")
+
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

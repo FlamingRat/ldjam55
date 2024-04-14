@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=13 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
 [ext_resource type="Texture2D" uid="uid://dxqyj6coi7fmi" path="res://levels/grid.png" id="2_jwiha"]
+[ext_resource type="PackedScene" uid="uid://caut86utiy4sd" path="res://enemies/badgy.tscn" id="3_qrpkt"]
 
 [sub_resource type="Curve" id="Curve_j7rfp"]
 _data = [Vector2(0.168874, 0.541888), 0.0, 0.0, 0, 0, Vector2(0.814569, 0.680186), 0.0, 0.0, 0, 0]
@@ -57,3 +58,6 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 11, 7)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_knx1d")
+
+[node name="Badgy" parent="." instance=ExtResource("3_qrpkt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
