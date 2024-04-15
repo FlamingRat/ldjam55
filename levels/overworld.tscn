@@ -93,9 +93,7 @@ heightmap_texture = ExtResource("9_p8bsw")
 uv1_scale = Vector3(0.12, 1, 1)
 uv1_offset = Vector3(0.5, 0, 0.5)
 uv1_triplanar = true
-uv1_triplanar_sharpness = 0.999999
-uv2_scale = Vector3(0.12, 1, 1)
-uv2_offset = Vector3(0.5, 0, 0.5)
+uv1_world_triplanar = true
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nlgnt"]
@@ -140,7 +138,7 @@ environment = SubResource("Environment_o5dg7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.192522, 0.975737, 0.104276, 0, -0.106264, 0.994338, 0.981293, -0.191432, -0.0204582, 0, 0, 0)
-light_energy = 0.154
+light_energy = 0.5
 shadow_enabled = true
 shadow_opacity = 0.65
 shadow_blur = 6.0
