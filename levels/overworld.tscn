@@ -1,25 +1,19 @@
-[gd_scene load_steps=36 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=29 format=3 uid="uid://beppg36hn1e7c"]
 
+[ext_resource type="PackedScene" uid="uid://c31hns2nx6jxu" path="res://ui/ui.tscn" id="1_a201a"]
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
 [ext_resource type="Texture2D" uid="uid://dxqyj6coi7fmi" path="res://levels/grid.png" id="2_jwiha"]
 [ext_resource type="Script" path="res://levels/camera.gd" id="3_mka4u"]
 [ext_resource type="PackedScene" uid="uid://caut86utiy4sd" path="res://enemies/badgy.tscn" id="3_qrpkt"]
 [ext_resource type="Script" path="res://enemies/spawner.gd" id="3_r3tab"]
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="5_6jcuj"]
-[ext_resource type="Script" path="res://ui/log.gd" id="6_c8um8"]
-[ext_resource type="Script" path="res://levels/commands.gd" id="8_imarg"]
 [ext_resource type="Texture2D" uid="uid://c4hnbbj2m6iaj" path="res://ui/vamper_walls.png" id="9_5nfgd"]
 [ext_resource type="Texture2D" uid="uid://kt057pvlb8b2" path="res://ui/vampetiles.png" id="9_p8bsw"]
-[ext_resource type="Texture2D" uid="uid://d08cml40d016x" path="res://ui/vamper_picture.png" id="9_tfyth"]
-[ext_resource type="Theme" uid="uid://ckjd70sogfw06" path="res://ui/main_theme.tres" id="10_ow2lw"]
 [ext_resource type="AudioStream" uid="uid://74t3jhdm6qg8" path="res://ui/sound/vampeta_music.mp3" id="11_hqhkr"]
-[ext_resource type="Script" path="res://ui/health_bar.gd" id="11_vf875"]
-[ext_resource type="Script" path="res://ui/steps_indicator.gd" id="12_5lp8k"]
-[ext_resource type="Script" path="res://ui/mana_bar.gd" id="12_vpdck"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5vxg"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_bottom_color = Color(0.0470588, 0.0117647, 0.027451, 1)
 
 [sub_resource type="Sky" id="Sky_dv2l5"]
 sky_material = SubResource("ProceduralSkyMaterial_c5vxg")
@@ -67,9 +61,6 @@ _data = {
 "new_animation": SubResource("Animation_1tngm")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1nvi"]
-bg_color = Color(0, 0.309804, 0.843137, 1)
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7smoa"]
 offset = Vector3(0.5, 0.5, 0.5)
 fractal_gain = 0.75
@@ -106,7 +97,7 @@ texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nlgnt"]
 material = SubResource("StandardMaterial3D_3tuhe")
-size = Vector2(21, 15)
+size = Vector2(100, 50)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqs35"]
 albedo_texture = ExtResource("9_5nfgd")
@@ -184,143 +175,6 @@ turns_per_spawn_per_turn_increase = 5
 [node name="CharacterTurnListener" type="Node" parent="Spawner"]
 script = ExtResource("5_6jcuj")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Log" type="TextEdit" parent="CanvasLayer"]
-custom_minimum_size = Vector2(300, 0)
-offset_left = 969.0
-offset_top = 483.0
-offset_right = 1269.0
-offset_bottom = 584.0
-theme = ExtResource("10_ow2lw")
-theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
-placeholder_text = "Player's Turn!"
-editable = false
-wrap_mode = 1
-script = ExtResource("6_c8um8")
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -127.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.305882, 0.113725, 0.0627451, 1)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ColorRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = 17.0
-offset_right = -11.0
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ColorRect/HBoxContainer"]
-clip_children = 2
-custom_minimum_size = Vector2(96, 0)
-layout_mode = 2
-color = Color(0.317647, 0.117647, 0.313726, 1)
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ColorRect/HBoxContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -41.0
-offset_top = -44.0
-offset_right = 44.0
-offset_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("9_tfyth")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ColorRect/HBoxContainer"]
-custom_minimum_size = Vector2(450, 0)
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Name" type="Label" parent="CanvasLayer/ColorRect/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("10_ow2lw")
-text = "Marcus þe Vampyr"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ColorRect/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="HealthIndicator" type="Label" parent="CanvasLayer/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("10_ow2lw")
-text = "Helthe"
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("player")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource("10_ow2lw")
-value = 100.0
-script = ExtResource("11_vf875")
-player = NodePath("../../../../../../Player")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/ColorRect/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="ManaIndicator" type="Label" parent="CanvasLayer/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("10_ow2lw")
-text = "Magick"
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("player")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource("10_ow2lw")
-theme_override_styles/fill = SubResource("StyleBoxFlat_g1nvi")
-value = 100.0
-script = ExtResource("12_vpdck")
-player = NodePath("../../../../../../Player")
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/ColorRect/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="StepsIndicator" type="Label" parent="CanvasLayer/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer3" node_paths=PackedStringArray("player")]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("10_ow2lw")
-text = "Steppes: 4/4"
-script = ExtResource("12_5lp8k")
-player = NodePath("../../../../../../Player")
-
-[node name="Justify" type="Control" parent="CanvasLayer/ColorRect/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Commands" type="RichTextLabel" parent="CanvasLayer/ColorRect/HBoxContainer"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-theme = ExtResource("10_ow2lw")
-bbcode_enabled = true
-text = "[Arrow keys] Move
-[Space] Summon Skelvin
-[E] End turn,+
-"
-shortcut_keys_enabled = false
-script = ExtResource("8_imarg")
-
 [node name="FloorTexture" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_nlgnt")
 
@@ -341,4 +195,17 @@ stream = ExtResource("11_hqhkr")
 volume_db = -4.622
 autoplay = true
 
+[node name="UI" parent="." instance=ExtResource("1_a201a")]
+
+[node name="ProgressBar" parent="UI/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer" index="1" node_paths=PackedStringArray("player")]
+player = NodePath("../../../../../../Player")
+
+[node name="ProgressBar" parent="UI/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer2" index="1" node_paths=PackedStringArray("player")]
+player = NodePath("../../../../../../Player")
+
+[node name="StepsIndicator" parent="UI/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer3" index="0" node_paths=PackedStringArray("player")]
+player = NodePath("../../../../../../Player")
+
 [connection signal="on_turn" from="Spawner/CharacterTurnListener" to="Spawner" method="_on_character_turn_listener_on_turn"]
+
+[editable path="UI"]

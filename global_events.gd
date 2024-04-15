@@ -20,6 +20,9 @@ var units = []
 var current_turn: int = 0
 var current_turn_unit: Node3D:
 	get:
+		if not len(units):
+			return
+
 		if current_turn > len(units) - 1:
 			current_turn = 0
 

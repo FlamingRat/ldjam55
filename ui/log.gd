@@ -1,4 +1,5 @@
 extends TextEdit
+class_name BattleLog
 
 
 func _ready():
