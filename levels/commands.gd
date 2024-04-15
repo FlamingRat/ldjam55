@@ -4,7 +4,7 @@ extends RichTextLabel
 const BASE_COMMANDS = "[WASD/Arrow keys] Move
 [1] Summon Skelvin
 [Space] End turn"
-const SUMMONING = "[WASD/Arrow keys] Select summon placement
+const SUMMONING = "[WASD/Arrow keys] Move cursor
 [Space] Confirm summon"
 
 
