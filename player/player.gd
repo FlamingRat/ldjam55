@@ -53,7 +53,7 @@ func start_summon():
 		return
 
 	GlobalEvents.player_state = GlobalEvents.PlayerState.SUMMONING
-	summons.start_summon(Vector3.RIGHT if movement.facing_right else Vector3.LEFT)
+	summons.start_summon()
 
 
 func summon(pos: Vector3):

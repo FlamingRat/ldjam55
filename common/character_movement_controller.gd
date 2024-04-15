@@ -61,7 +61,14 @@ func movement_allowed(direction: Vector3):
 		printerr('Warn: Collision detector missing at ', self)
 		return true
 
-	collision_detector.global_position = get_parent().global_position
+	var current_pos = get_parent().global_position
+	if abs((current_pos + direction).x) > GlobalEvents.level_size.x / 2:
+		return false
+
+	if abs((current_pos + direction).z) > GlobalEvents.level_size.y / 2:
+		return false
+
+	collision_detector.global_position = current_pos
 	collision_detector.target_position = direction * 1.25
 	var collisions = []
 	collision_detector.force_raycast_update()

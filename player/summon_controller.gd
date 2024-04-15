@@ -32,11 +32,11 @@ func _process(_delta):
 		summon_controls[action].call()
 
 
-func start_summon(pos: Vector3):
+func start_summon():
 	frame_lock = true
 	indicator = summon_indicator.instantiate()
 	player.add_child(indicator)
-	indicator.position = pos
+	indicator.position = Vector3.ZERO
 
 
 func up():
@@ -86,8 +86,15 @@ func summon_allowed():
 		printerr('Warn: Summon validator missing at ', self)
 		return true
 
+	var current_pos = indicator.global_position
+	if abs(current_pos.x) > GlobalEvents.level_size.x / 2:
+		return false
+
+	if abs(current_pos.z) > GlobalEvents.level_size.y / 2:
+		return false
+
 	var collisions = []
-	summon_position_validator.global_position = Vector3.DOWN * 5 + indicator.global_position
+	summon_position_validator.global_position = Vector3.DOWN * 5 + current_pos
 	summon_position_validator.force_raycast_update()
 	while summon_position_validator.get_collider():
 		var coll = summon_position_validator.get_collider()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=30 format=3 uid="uid://beppg36hn1e7c"]
 
-[ext_resource type="PackedScene" path="res://ui/ui.tscn" id="1_a201a"]
+[ext_resource type="PackedScene" uid="uid://c31hns2nx6jxu" path="res://ui/ui.tscn" id="1_a201a"]
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
 [ext_resource type="Texture2D" uid="uid://dxqyj6coi7fmi" path="res://levels/grid.png" id="2_jwiha"]
 [ext_resource type="Script" path="res://levels/camera.gd" id="3_mka4u"]
@@ -12,8 +12,9 @@
 [ext_resource type="AudioStream" uid="uid://74t3jhdm6qg8" path="res://ui/sound/vampeta_music.mp3" id="11_hqhkr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5vxg"]
+sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_bottom_color = Color(0.0470588, 0.0117647, 0.027451, 1)
+ground_bottom_color = Color(0.101961, 0.0117647, 0.129412, 1)
 
 [sub_resource type="Sky" id="Sky_dv2l5"]
 sky_material = SubResource("ProceduralSkyMaterial_c5vxg")
@@ -97,7 +98,7 @@ texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nlgnt"]
 material = SubResource("StandardMaterial3D_3tuhe")
-size = Vector2(100, 50)
+size = Vector2(21, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqs35"]
 albedo_texture = ExtResource("9_5nfgd")
@@ -108,7 +109,11 @@ texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_4ghgy"]
 material = SubResource("StandardMaterial3D_hqs35")
-size = Vector3(21, 10, 1)
+size = Vector3(21, 2.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bkh12"]
+material = SubResource("StandardMaterial3D_hqs35")
+size = Vector3(15, 0.1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_2er3p"]
 
@@ -128,7 +133,7 @@ texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_1s0rp"]
 material = SubResource("StandardMaterial3D_8u3rw")
-size = Vector3(1, 10, 15)
+size = Vector3(1, 2, 15)
 
 [node name="Overworld" type="Node3D"]
 
@@ -184,15 +189,25 @@ collide_with_areas = true
 mesh = SubResource("PlaneMesh_nlgnt")
 
 [node name="Backwall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, -8)
 mesh = SubResource("BoxMesh_4ghgy")
 
+[node name="RightWallTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 2.1, 0)
+mesh = SubResource("BoxMesh_bkh12")
+skeleton = NodePath("../Backwall")
+
+[node name="LeftWallTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, 2.1, 0)
+mesh = SubResource("BoxMesh_bkh12")
+skeleton = NodePath("../Backwall")
+
 [node name="Leftwall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1, 0)
 mesh = SubResource("BoxMesh_1s0rp")
 
 [node name="Rightwall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1, 0)
 mesh = SubResource("BoxMesh_1s0rp")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

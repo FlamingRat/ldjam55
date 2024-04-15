@@ -15,6 +15,7 @@ signal next_turn_announced(unit: Node3D)
 signal attack(attacker: AttackRange, health: Health)
 
 
+var level_size = Vector2(21, 15)
 var timer = TURN_TIME
 var units = []
 var current_turn: int = 0

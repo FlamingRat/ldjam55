@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c31hns2nx6jxu"]
 
-[ext_resource type="Theme" uid="uid://ckjd70sogfw06" path="res://ui/main_theme.tres" id="1_4v333"]
+[ext_resource type="Theme" uid="uid://dbxl66juvchyr" path="res://ui/main_theme.tres" id="1_4v333"]
 [ext_resource type="Script" path="res://ui/log.gd" id="2_t1d6l"]
 [ext_resource type="Texture2D" uid="uid://d08cml40d016x" path="res://ui/vamper_picture.png" id="3_ondu4"]
 [ext_resource type="Script" path="res://ui/health_bar.gd" id="4_vh3si"]
@@ -91,14 +91,13 @@ size_flags_vertical = 3
 theme = ExtResource("1_4v333")
 text = "Helthe"
 
-[node name="ProgressBar" type="ProgressBar" parent="ColorRect/HBoxContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("player")]
+[node name="ProgressBar" type="ProgressBar" parent="ColorRect/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme = ExtResource("1_4v333")
 value = 100.0
 script = ExtResource("4_vh3si")
-player = NodePath("")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -110,7 +109,7 @@ size_flags_vertical = 3
 theme = ExtResource("1_4v333")
 text = "Magick"
 
-[node name="ProgressBar" type="ProgressBar" parent="ColorRect/HBoxContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("player")]
+[node name="ProgressBar" type="ProgressBar" parent="ColorRect/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -118,19 +117,17 @@ theme = ExtResource("1_4v333")
 theme_override_styles/fill = SubResource("StyleBoxFlat_g1nvi")
 value = 100.0
 script = ExtResource("5_81i4v")
-player = NodePath("")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="StepsIndicator" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/HBoxContainer3" node_paths=PackedStringArray("player")]
+[node name="StepsIndicator" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_4v333")
 text = "Steppes: 4/4"
 script = ExtResource("6_jysce")
-player = NodePath("")
 
 [node name="Justify" type="Control" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
