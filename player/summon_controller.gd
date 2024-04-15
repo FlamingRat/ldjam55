@@ -3,11 +3,11 @@ class_name SummonController
 
 
 var summon_controls = {
-	"ui_up": up,
-	"ui_down": down,
-	"ui_left": left,
-	"ui_right": right,
-	"ui_accept": confirm_summon,
+	"move_up": up,
+	"move_down": down,
+	"move_left": left,
+	"move_right": right,
+	"confirm": confirm_summon,
 }
 
 

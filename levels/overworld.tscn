@@ -310,7 +310,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Commands" type="RichTextLabel" parent="CanvasLayer/ColorRect/HBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme = ExtResource("10_ow2lw")
 bbcode_enabled = true

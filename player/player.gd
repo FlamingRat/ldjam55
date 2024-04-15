@@ -21,12 +21,12 @@ var turn_actions: bool:
 
 
 var actions = {
-	"ui_up": move_up,
-	"ui_down": move_down,
-	"ui_left": move_left,
-	"ui_right": move_right,
-	"ui_accept": start_summon,
-	"end_turn": end_turn,
+	"move_up": move_up,
+	"move_down": move_down,
+	"move_left": move_left,
+	"move_right": move_right,
+	"summon1": start_summon,
+	"confirm": end_turn,
 }
 
 
@@ -109,7 +109,8 @@ func move_right():
 
 
 func end_turn():
-	GlobalEvents.end_turn()
+	if GlobalEvents.player_state == GlobalEvents.PlayerState.WALKING:
+		GlobalEvents.end_turn()
 
 
 func _on_health_health_depleted():
