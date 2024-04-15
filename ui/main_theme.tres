@@ -9,6 +9,8 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.705882, 0, 0, 1)
 
 [resource]
+default_font = ExtResource("1_4nrwb")
+default_font_size = 20
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("1_4nrwb")
@@ -17,3 +19,4 @@ ProgressBar/font_sizes/font_size = 20
 ProgressBar/fonts/font = ExtResource("1_4nrwb")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_lqxtp")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_nmf3i")
+TextEdit/fonts/font = ExtResource("1_4nrwb")

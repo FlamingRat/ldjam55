@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c31hns2nx6jxu"]
+[gd_scene load_steps=10 format=3 uid="uid://c31hns2nx6jxu"]
 
 [ext_resource type="Theme" uid="uid://dbxl66juvchyr" path="res://ui/main_theme.tres" id="1_4v333"]
 [ext_resource type="Script" path="res://ui/log.gd" id="2_t1d6l"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://ui/mana_bar.gd" id="5_81i4v"]
 [ext_resource type="Script" path="res://ui/steps_indicator.gd" id="6_jysce"]
 [ext_resource type="Script" path="res://levels/commands.gd" id="7_7ryl4"]
+[ext_resource type="Script" path="res://ui/stats.gd" id="8_rmeem"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1nvi"]
 bg_color = Color(0, 0.309804, 0.843137, 1)
@@ -138,9 +139,22 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme = ExtResource("1_4v333")
 bbcode_enabled = true
-text = "[Arrow keys] Move
-[Space] Summon Skelvin
-[E] End turn,+
-"
 shortcut_keys_enabled = false
 script = ExtResource("7_7ryl4")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 73.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.478431)
+
+[node name="Stats" type="Label" parent="ColorRect2"]
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 139.0
+offset_bottom = 58.0
+theme = ExtResource("1_4v333")
+text = "Total Score: {}
+Turns survived: {}"
+script = ExtResource("8_rmeem")

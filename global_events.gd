@@ -13,8 +13,10 @@ enum PlayerState {
 signal next_turn(unit: Node3D)
 signal next_turn_announced(unit: Node3D)
 signal attack(attacker: AttackRange, health: Health)
+signal kill
 
 
+var round_count: int = 0
 var level_size = Vector2(21, 15)
 var timer = TURN_TIME
 var units = []
@@ -38,7 +40,10 @@ func end_turn():
 
 
 func start_turn():
-	next_turn.emit(current_turn_unit)	
+	if current_turn == 0:
+		round_count += 1
+
+	next_turn.emit(current_turn_unit)
 
 
 func register_unit(unit: Node3D):
@@ -47,4 +52,9 @@ func register_unit(unit: Node3D):
 
 
 func unregister_unit(unit: Node3D):
+	var alignment = unit.get_node('Alignment')
+
+	if alignment and alignment.faction != Alignment.Faction.VAMPER:
+		kill.emit()
+
 	units.remove_at(units.find(unit))

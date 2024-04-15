@@ -2,7 +2,7 @@ extends RichTextLabel
 
 
 const BASE_COMMANDS = "[WASD/Arrow keys] Move
-[1-3] Summon
+[1-2] Summon
 [Space] End turn"
 const SUMMONING = "[WASD/Arrow keys] Move cursor
 [Space] Confirm summon"
