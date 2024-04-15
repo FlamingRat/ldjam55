@@ -178,6 +178,7 @@ libraries = {
 
 [node name="DeathSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_26c25")
+volume_db = -5.393
 pitch_scale = 1.3
 
 [node name="StepSFX" type="AudioStreamPlayer" parent="."]

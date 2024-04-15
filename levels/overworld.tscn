@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=30 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
 [ext_resource type="Texture2D" uid="uid://dxqyj6coi7fmi" path="res://levels/grid.png" id="2_jwiha"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://levels/commands.gd" id="8_imarg"]
 [ext_resource type="Texture2D" uid="uid://c4hnbbj2m6iaj" path="res://ui/vamper_walls.png" id="9_5nfgd"]
 [ext_resource type="Texture2D" uid="uid://kt057pvlb8b2" path="res://ui/vampetiles.png" id="9_p8bsw"]
+[ext_resource type="AudioStream" uid="uid://74t3jhdm6qg8" path="res://ui/sound/vampeta_music.mp3" id="11_hqhkr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5vxg"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -215,24 +216,13 @@ mesh = SubResource("BoxMesh_4ghgy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 5, 0)
 mesh = SubResource("BoxMesh_1s0rp")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.93694, 2.69747, 0)
-visible = false
-light_energy = 5.734
-light_indirect_energy = 6.688
-omni_range = 21.89
-omni_attenuation = 0.0647041
-
 [node name="Rightwall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 5, 0)
 mesh = SubResource("BoxMesh_1s0rp")
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.27945, 4.14493, 0)
-visible = false
-light_energy = 5.657
-light_indirect_energy = 6.688
-omni_range = 21.89
-omni_attenuation = 0.0647041
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_hqhkr")
+volume_db = -4.622
+autoplay = true
 
 [connection signal="on_turn" from="Spawner/CharacterTurnListener" to="Spawner" method="_on_character_turn_listener_on_turn"]

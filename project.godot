@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="LDJam 55"
+config/name="Vamper"
+config/version="0.0.1"
 run/main_scene="res://levels/overworld.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/image="res://vamper.png"
+config/icon="res://vamper.png"
 
 [autoload]
 
