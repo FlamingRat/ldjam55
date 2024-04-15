@@ -8,6 +8,7 @@ class_name Spawner
 @export var spawn_per_turn: int
 @export var turns_per_spawn_per_turn_increase: int
 @onready var turn_counter = spawn_cooldown
+@onready var spawn_checker = $SpawnChecker
 var total_turn_counter = 0
 
 
@@ -29,5 +30,35 @@ func spawn_units():
 	for i in spawn_per_turn:
 		var inst = spawn.instantiate()
 		get_parent().add_child(inst)
-		var randpos = Vector3(randi_range(-spawn_range, spawn_range), 0, randi_range(-spawn_range, spawn_range))
+		var randpos = random_spawn()
+		while not valid_spawn(randpos):
+			randpos = random_spawn()
+
 		inst.global_position = global_position + randpos
+
+
+func random_spawn():
+	return Vector3(randi_range(-spawn_range, spawn_range), 0, randi_range(-spawn_range, spawn_range))
+
+
+func valid_spawn(pos: Vector3):
+	spawn_checker.global_position = pos + Vector3.DOWN * 5
+	spawn_checker.force_raycast_update()
+
+	var collisions = []
+	while spawn_checker.get_collider():
+		spawn_checker.force_raycast_update()
+
+		var coll = spawn_checker.get_collider()
+		if not coll:
+			continue
+
+		collisions.append(coll)
+		spawn_checker.add_exception(coll)
+
+	spawn_checker.clear_exceptions()
+	return not collisions.any(is_hitbox)
+
+
+func is_hitbox(coll: Area3D):
+	return coll is Hitbox
