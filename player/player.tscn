@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://c7biv641mnrue"]
+[gd_scene load_steps=24 format=3 uid="uid://c7biv641mnrue"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_armax"]
 [ext_resource type="PackedScene" uid="uid://ccwhs1dn3tpvv" path="res://ui/summon_indicator.tscn" id="2_3inrr"]
 [ext_resource type="PackedScene" uid="uid://bo0cwffonwbgn" path="res://summons/skelvin.tscn" id="2_uva74"]
 [ext_resource type="Texture2D" uid="uid://rf4pqpseb237" path="res://player/Vamper-0003.png" id="2_wkwxg"]
 [ext_resource type="AnimationLibrary" uid="uid://c8p2e6fnke5r8" path="res://common/character_turns.res" id="3_5c3ri"]
+[ext_resource type="PackedScene" uid="uid://c1y525rwfj1d0" path="res://summons/demondoor.tscn" id="3_t3lhk"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://bs7rbmyb11p53" path="res://common/character_animations.tres" id="4_6q4jw"]
 [ext_resource type="Animation" uid="uid://6bj6lt8u47df" path="res://common/take_damage_animation.res" id="4_bdta8"]
 [ext_resource type="Script" path="res://common/character_movement_controller.gd" id="5_aaepl"]
@@ -108,7 +109,7 @@ _data = {
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_armax")
-skelvin = ExtResource("2_uva74")
+summon_units = Array[PackedScene]([ExtResource("2_uva74"), ExtResource("3_t3lhk")])
 movement_speed = 4
 mana = 3
 summon_range = 3

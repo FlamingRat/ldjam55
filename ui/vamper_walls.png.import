@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c4hnbbj2m6iaj"
-path.s3tc="res://.godot/imported/vamper_walls.png-d7ce1333b20d71720aab4a0597a63bfd.s3tc.ctex"
+path="res://.godot/imported/vamper_walls.png-d7ce1333b20d71720aab4a0597a63bfd.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://ui/vamper_walls.png"
-dest_files=["res://.godot/imported/vamper_walls.png-d7ce1333b20d71720aab4a0597a63bfd.s3tc.ctex"]
+dest_files=["res://.godot/imported/vamper_walls.png-d7ce1333b20d71720aab4a0597a63bfd.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

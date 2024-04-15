@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kt057pvlb8b2"
-path="res://.godot/imported/vampetiles.png-0099a1e97c159e2324c1a16a58dd5bc5.ctex"
+uid="uid://b5htyjnfnps45"
+path="res://.godot/imported/demondoor.png-5adeab5f328090d9b1d47876fa2ebfc5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/vampetiles.png"
-dest_files=["res://.godot/imported/vampetiles.png-0099a1e97c159e2324c1a16a58dd5bc5.ctex"]
+source_file="res://summons/demondoor.png"
+dest_files=["res://.godot/imported/demondoor.png-5adeab5f328090d9b1d47876fa2ebfc5.ctex"]
 
 [params]
 

@@ -2,7 +2,7 @@ extends Node3D
 class_name Player
 
 
-@export var skelvin: PackedScene
+@export var summon_units: Array[PackedScene]
 @export var movement_speed: int
 @export var mana: int = 1
 @export var mana_regen: int = 1
@@ -13,6 +13,7 @@ class_name Player
 @onready var collision_detector := $CollisionDetector
 @onready var steps_available = movement_speed
 @onready var current_mana = mana
+var summon_slot: int
 
 
 var turn_actions: bool:
@@ -25,7 +26,8 @@ var actions = {
 	"move_down": move_down,
 	"move_left": move_left,
 	"move_right": move_right,
-	"summon1": start_summon,
+	"summon1": func(): start_summon(0),
+	"summon2": func(): start_summon(1),
 	"confirm": end_turn,
 }
 
@@ -48,19 +50,20 @@ func turn_input_listener():
 		actions[action].call()
 
 
-func start_summon():
+func start_summon(new_summon_slot: int):
 	if not current_mana or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
 		return
 
 	GlobalEvents.player_state = GlobalEvents.PlayerState.SUMMONING
+	summon_slot = new_summon_slot
 	summons.start_summon()
 
 
 func summon(pos: Vector3):
 	GlobalEvents.player_state = GlobalEvents.PlayerState.WALKING
-	var inst_skelvin: Skelvin = skelvin.instantiate()
-	get_parent().add_child(inst_skelvin)
-	inst_skelvin.global_position = pos
+	var inst_unit: Node3D = summon_units[summon_slot].instantiate()
+	get_parent().add_child(inst_unit)
+	inst_unit.global_position = pos
 	current_mana -= 1
 
 

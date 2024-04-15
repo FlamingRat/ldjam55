@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=32 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c31hns2nx6jxu" path="res://ui/ui.tscn" id="1_a201a"]
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://c4hnbbj2m6iaj" path="res://ui/vamper_walls.png" id="9_5nfgd"]
 [ext_resource type="Texture2D" uid="uid://kt057pvlb8b2" path="res://ui/vampetiles.png" id="9_p8bsw"]
 [ext_resource type="AudioStream" uid="uid://74t3jhdm6qg8" path="res://ui/sound/vampeta_music.mp3" id="11_hqhkr"]
+[ext_resource type="Texture2D" uid="uid://dfmnbnpcwjwvb" path="res://ui/summon_icons/sk.png" id="11_t0lpg"]
+[ext_resource type="Texture2D" uid="uid://bj7fauw8kdo7m" path="res://ui/summon_icons/dd.png" id="12_uuenj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5vxg"]
 sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
@@ -217,6 +219,9 @@ autoplay = true
 
 [node name="UI" parent="." instance=ExtResource("1_a201a")]
 
+[node name="HealthIndicator" parent="UI/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer" index="0"]
+text = "Helþe"
+
 [node name="ProgressBar" parent="UI/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer" index="1" node_paths=PackedStringArray("player")]
 player = NodePath("../../../../../../Player")
 
@@ -225,6 +230,48 @@ player = NodePath("../../../../../../Player")
 
 [node name="StepsIndicator" parent="UI/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer3" index="0" node_paths=PackedStringArray("player")]
 player = NodePath("../../../../../../Player")
+
+[node name="Control" type="Control" parent="UI/ColorRect/HBoxContainer" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ColorRect/HBoxContainer" index="3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ColorRect/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="UI/ColorRect/HBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_t0lpg")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="UI/ColorRect/HBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/ColorRect/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect2" type="TextureRect" parent="UI/ColorRect/HBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("12_uuenj")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="UI/ColorRect/HBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "2	"
+horizontal_alignment = 1
+
+[node name="Commands" parent="UI/ColorRect/HBoxContainer" index="5"]
+text = "[Arrow keys, WASD] Move
+[Space] Summon Skelvin
+[E] End turn,+
+"
 
 [connection signal="on_turn" from="Spawner/CharacterTurnListener" to="Spawner" method="_on_character_turn_listener_on_turn"]
 

@@ -107,6 +107,7 @@ texture_filter = 0
 render_priority = 2
 texture = ExtResource("1_2lu46")
 hframes = 6
+frame = 1
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("3_drbww")
