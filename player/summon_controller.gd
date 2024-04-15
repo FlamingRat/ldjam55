@@ -14,6 +14,7 @@ var summon_controls = {
 @export var summon_indicator: PackedScene
 @export var sfx: AudioStreamPlayer
 @onready var player: Player = get_parent()
+@onready var summon_position_validator := $SummonPositionValidator
 var indicator: Node3D
 var frame_lock = false
 
@@ -71,7 +72,36 @@ func right():
 
 
 func confirm_summon():
+	if not summon_allowed():
+		return
+
 	player.summon(player.global_position + indicator.position)
 	indicator.queue_free()
 	indicator = null
 	sfx.play()
+
+
+func summon_allowed():
+	if not summon_position_validator:
+		printerr('Warn: Summon validator missing at ', self)
+		return true
+
+	var collisions = []
+	summon_position_validator.global_position = Vector3.DOWN * 5 + indicator.global_position
+	summon_position_validator.force_raycast_update()
+	while summon_position_validator.get_collider():
+		var coll = summon_position_validator.get_collider()
+		if not coll:
+			continue
+
+		collisions.append(coll)
+		summon_position_validator.add_exception(coll)
+		summon_position_validator.force_raycast_update()
+
+	print(collisions)
+	summon_position_validator.clear_exceptions()
+	return not collisions.any(is_hitbox)
+
+
+func is_hitbox(coll: Area3D):
+	return coll is Hitbox
