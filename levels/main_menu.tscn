@@ -36,4 +36,4 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_l7bsl")
 theme_override_font_sizes/font_size = 96
-text = "Press Any Key"
+text = "Press Spacebar"

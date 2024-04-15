@@ -7,6 +7,7 @@ const TURN_TIME: float = 5
 enum PlayerState {
 	WALKING,
 	SUMMONING,
+	GAME_OVER,
 }
 
 
@@ -14,6 +15,8 @@ signal next_turn(unit: Node3D)
 signal next_turn_announced(unit: Node3D)
 signal attack(attacker: AttackRange, health: Health)
 signal kill
+signal game_over
+signal new_game
 
 
 var round_count: int = 0
@@ -31,6 +34,19 @@ var current_turn_unit: Node3D:
 
 		return units[current_turn]
 var player_state = PlayerState.WALKING
+
+
+func _ready():
+	game_over.connect(end_game)
+	new_game.connect(start_game)
+
+
+func start_game():
+	player_state = PlayerState.WALKING
+
+
+func end_game():
+	player_state = PlayerState.GAME_OVER
 
 
 func end_turn():

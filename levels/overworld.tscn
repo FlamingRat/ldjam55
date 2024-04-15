@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=37 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c31hns2nx6jxu" path="res://ui/ui.tscn" id="1_a201a"]
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
@@ -12,6 +12,10 @@
 [ext_resource type="AudioStream" uid="uid://74t3jhdm6qg8" path="res://ui/sound/vampeta_music.mp3" id="11_hqhkr"]
 [ext_resource type="Texture2D" uid="uid://dfmnbnpcwjwvb" path="res://ui/summon_icons/sk.png" id="11_t0lpg"]
 [ext_resource type="Texture2D" uid="uid://bj7fauw8kdo7m" path="res://ui/summon_icons/dd.png" id="12_uuenj"]
+[ext_resource type="Theme" uid="uid://dbxl66juvchyr" path="res://ui/main_theme.tres" id="13_0jx3v"]
+[ext_resource type="Script" path="res://ui/game_over_screen.gd" id="13_8rsed"]
+[ext_resource type="Script" path="res://ui/stats.gd" id="14_tn2gi"]
+[ext_resource type="Script" path="res://ui/game_over_key_listener.gd" id="15_yekp6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5vxg"]
 sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
@@ -239,6 +243,13 @@ text = "[Arrow keys, WASD] Move
 [E] End turn,+
 "
 
+[node name="Stats" parent="UI/ColorRect2" index="0"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 17.0
+offset_right = 148.0
+offset_bottom = 62.0
+
 [node name="Terrain" type="Node3D" parent="."]
 
 [node name="Grid" type="Sprite3D" parent="Terrain"]
@@ -284,6 +295,54 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1, 0)
 mesh = SubResource("BoxMesh_1s0rp")
 skeleton = NodePath("../..")
+
+[node name="GameOverScreen" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("13_8rsed")
+
+[node name="ColorRect" type="ColorRect" parent="GameOverScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.835294)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverScreen/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GameOverScreen/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("13_0jx3v")
+theme_override_colors/font_color = Color(0.854902, 0, 0, 1)
+theme_override_font_sizes/font_size = 128
+text = "You Died"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="Label" parent="GameOverScreen/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("13_0jx3v")
+text = "Total Score: {}
+Turns survived: {}"
+horizontal_alignment = 1
+script = ExtResource("14_tn2gi")
+
+[node name="GameOverKeyListener" type="Label" parent="GameOverScreen/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("13_0jx3v")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "Press Spacebar to Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("15_yekp6")
 
 [connection signal="on_turn" from="Spawner/CharacterTurnListener" to="Spawner" method="_on_character_turn_listener_on_turn"]
 

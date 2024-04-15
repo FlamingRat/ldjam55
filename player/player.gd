@@ -117,4 +117,5 @@ func end_turn():
 
 
 func _on_health_health_depleted():
+	GlobalEvents.game_over.emit()
 	queue_free()
