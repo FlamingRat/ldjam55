@@ -110,7 +110,7 @@ _data = {
 script = ExtResource("1_armax")
 skelvin = ExtResource("2_uva74")
 movement_speed = 4
-mana = 2
+mana = 3
 summon_range = 3
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

@@ -5,6 +5,7 @@ class_name Player
 @export var skelvin: PackedScene
 @export var movement_speed: int
 @export var mana: int = 1
+@export var mana_regen: int = 1
 @export var summon_range: int = 2
 @onready var notify_sfx := $NotifySFX
 @onready var movement := $CharacterMovementController
@@ -36,7 +37,7 @@ func _process(_delta):
 
 func _on_character_turn_listener_on_turn():
 	steps_available = movement_speed
-	current_mana = mana
+	current_mana = min(current_mana + mana_regen, mana)
 	notify_sfx.play()
 
 func turn_input_listener():

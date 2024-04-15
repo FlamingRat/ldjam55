@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ckjd70sogfw06"]
+
+[ext_resource type="FontFile" uid="uid://bs1ib8ecfq0vq" path="res://ui/Jacquard24-Regular.ttf" id="1_4nrwb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqxtp"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmf3i"]
+bg_color = Color(0.705882, 0, 0, 1)
+
+[resource]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("1_4nrwb")
+ProgressBar/colors/font_color = Color(1, 1, 1, 1)
+ProgressBar/font_sizes/font_size = 20
+ProgressBar/fonts/font = ExtResource("1_4nrwb")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_lqxtp")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_nmf3i")
