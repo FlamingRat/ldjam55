@@ -143,6 +143,7 @@ health = NodePath("../Health")
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("5_mq37y")
+unit_name = "Demondoor"
 
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("7_vlp1s")

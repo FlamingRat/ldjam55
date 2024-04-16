@@ -5,6 +5,9 @@ class_name CharacterTurnListener
 signal on_turn
 
 
+@export var unit_name: String
+
+
 func _ready():
 	GlobalEvents.next_turn.connect(on_next_turn)
 	GlobalEvents.register_unit(get_parent())

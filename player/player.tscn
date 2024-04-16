@@ -159,6 +159,7 @@ sfx = NodePath("../StepSFX")
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("6_ofdec")
+unit_name = "Vamper"
 
 [node name="SummonController" type="Node" parent="." node_paths=PackedStringArray("sfx")]
 script = ExtResource("8_v5af1")

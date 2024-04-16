@@ -123,6 +123,7 @@ sfx = NodePath("../StepSFX")
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("1_cttst")
+unit_name = "Skelvin"
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "sfx")]
 script = ExtResource("7_bempt")

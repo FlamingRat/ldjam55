@@ -165,6 +165,7 @@ hframes = 12
 
 [node name="CharacterTurnListener" type="Node" parent="."]
 script = ExtResource("3_drbww")
+unit_name = "Fabilus"
 
 [node name="Sight" type="Area3D" parent="."]
 
