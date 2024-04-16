@@ -208,5 +208,9 @@ pitch_scale = 0.6
 stream = ExtResource("18_ygnnl")
 pitch_scale = 3.43
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.655533, 0.895479)
+projection = 1
+
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

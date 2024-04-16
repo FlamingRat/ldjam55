@@ -15,6 +15,7 @@
 [ext_resource type="Theme" uid="uid://dbxl66juvchyr" path="res://ui/main_theme.tres" id="13_0jx3v"]
 [ext_resource type="Script" path="res://ui/game_over_screen.gd" id="13_8rsed"]
 [ext_resource type="Script" path="res://ui/stats.gd" id="14_tn2gi"]
+[ext_resource type="FontFile" uid="uid://bs1ib8ecfq0vq" path="res://ui/fonts/Jacquard24-Regular.ttf" id="15_loiwj"]
 [ext_resource type="Script" path="res://ui/game_over_key_listener.gd" id="15_yekp6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5vxg"]
@@ -30,8 +31,6 @@ background_mode = 2
 sky = SubResource("Sky_dv2l5")
 tonemap_mode = 2
 volumetric_fog_enabled = true
-
-[sub_resource type="SystemFont" id="SystemFont_87f76"]
 
 [sub_resource type="Animation" id="Animation_q3vdr"]
 length = 0.001
@@ -185,12 +184,9 @@ autoplay = true
 
 [node name="UI" parent="." instance=ExtResource("1_a201a")]
 
-[node name="Log" parent="UI" index="0"]
-theme_override_fonts/font = SubResource("SystemFont_87f76")
-theme_override_font_sizes/font_size = 12
-
-[node name="HealthIndicator" parent="UI/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer" index="0"]
-text = "Helþe"
+[node name="ColorRect" parent="UI/ColorRect/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(110, 0)
+color = Color(0.25098, 0.188235, 0.247059, 1)
 
 [node name="ProgressBar" parent="UI/ColorRect/HBoxContainer/VBoxContainer/HBoxContainer" index="1" node_paths=PackedStringArray("player")]
 player = NodePath("../../../../../../Player")
@@ -321,6 +317,7 @@ alignment = 1
 layout_mode = 2
 theme = ExtResource("13_0jx3v")
 theme_override_colors/font_color = Color(0.854902, 0, 0, 1)
+theme_override_fonts/font = ExtResource("15_loiwj")
 theme_override_font_sizes/font_size = 128
 text = "You Died"
 horizontal_alignment = 1
@@ -338,6 +335,7 @@ script = ExtResource("14_tn2gi")
 layout_mode = 2
 theme = ExtResource("13_0jx3v")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("15_loiwj")
 theme_override_font_sizes/font_size = 48
 text = "Press Spacebar to Continue"
 horizontal_alignment = 1

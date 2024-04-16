@@ -86,11 +86,11 @@ text = "Marcus þe Vampyr"
 layout_mode = 2
 
 [node name="HealthIndicator" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_4v333")
-text = "Helthe"
+text = "Helþe"
 
 [node name="ProgressBar" type="ProgressBar" parent="ColorRect/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -104,7 +104,7 @@ script = ExtResource("4_vh3si")
 layout_mode = 2
 
 [node name="ManaIndicator" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_4v333")
