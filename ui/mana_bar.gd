@@ -6,6 +6,6 @@ class_name ManaBar
 
 
 func _process(_delta):
-	if weakref(player).get_ref():
-		max_value = player.mana
-		value = player.current_mana
+    if weakref(player).get_ref():
+        max_value = player.mana
+        value = player.current_mana

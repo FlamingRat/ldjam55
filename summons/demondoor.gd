@@ -6,9 +6,9 @@ class_name Demondoor
 
 
 func _on_health_health_depleted():
-	queue_free()
+    queue_free()
 
 
 func _on_character_turn_listener_on_turn():
-	health.current_health = min(health.max_health, health.current_health + 1)
-	GlobalEvents.end_turn()
+    health.current_health = min(health.max_health, health.current_health + 1)
+    GlobalEvents.end_turn()

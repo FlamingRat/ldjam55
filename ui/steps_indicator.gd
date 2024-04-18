@@ -7,8 +7,8 @@ class_name StepsIndicator
 
 
 func _process(_delta):
-	if not weakref(player).get_ref():
-		return
+    if not weakref(player).get_ref():
+        return
 
-	var steps_text = str(player.steps_available) + '/' + str(player.movement_speed)
-	text = text_template.replace('{}', steps_text)
+    var steps_text = str(player.steps_available) + '/' + str(player.movement_speed)
+    text = text_template.replace('{}', steps_text)

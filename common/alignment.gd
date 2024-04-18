@@ -3,8 +3,8 @@ class_name Alignment
 
 
 enum Faction {
-	VAMPER,
-	CROSS,
+    VAMPER,
+    CROSS,
 }
 
 

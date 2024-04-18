@@ -20,6 +20,13 @@ config/icon="res://vamper.png"
 [autoload]
 
 GlobalEvents="*res://global_events.gd"
+Store="*res://state/store.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
 
 [display]
 

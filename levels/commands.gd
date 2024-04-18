@@ -12,19 +12,19 @@ var player = true
 
 
 func _ready():
-	GlobalEvents.next_turn.connect(_on_turn)
+    GlobalEvents.next_turn.connect(_on_turn)
 
 
 func _process(_delta):
-	if not player:
-		text = ""
-		return
+    if not player:
+        text = ""
+        return
 
-	if GlobalEvents.player_state == GlobalEvents.PlayerState.SUMMONING:
-		text = SUMMONING
-	else:
-		text = BASE_COMMANDS
+    if GlobalEvents.player_state == GlobalEvents.PlayerState.SUMMONING:
+        text = SUMMONING
+    else:
+        text = BASE_COMMANDS
 
 
 func _on_turn(unit):
-	player = unit is Player
+    player = unit is Player

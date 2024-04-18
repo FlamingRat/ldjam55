@@ -165,6 +165,7 @@ script = ExtResource("3_mka4u")
 [node name="Spawner" type="Node3D" parent="."]
 script = ExtResource("3_r3tab")
 spawn = ExtResource("3_qrpkt")
+spawn_cooldown = null
 spawn_range = 7
 spawn_per_turn = 1
 turns_per_spawn_per_turn_increase = 5
@@ -240,7 +241,6 @@ text = "[Arrow keys, WASD] Move
 "
 
 [node name="Stats" parent="UI/ColorRect2" index="0"]
-layout_mode = 0
 offset_left = 24.0
 offset_top = 17.0
 offset_right = 148.0

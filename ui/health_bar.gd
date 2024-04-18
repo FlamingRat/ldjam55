@@ -7,6 +7,6 @@ class_name HealthBar
 
 
 func _process(_delta):
-	if weakref(health).get_ref():
-		max_value = health.max_health
-		value = health.current_health
+    if weakref(health).get_ref():
+        max_value = health.max_health
+        value = health.current_health

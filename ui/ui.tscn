@@ -150,6 +150,7 @@ grow_horizontal = 2
 color = Color(0, 0, 0, 0.478431)
 
 [node name="Stats" type="Label" parent="ColorRect2"]
+layout_mode = 0
 offset_left = 15.0
 offset_top = 13.0
 offset_right = 139.0

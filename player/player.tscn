@@ -112,6 +112,7 @@ script = ExtResource("1_armax")
 summon_units = Array[PackedScene]([ExtResource("2_uva74"), ExtResource("3_t3lhk")])
 movement_speed = 4
 mana = 3
+mana_regen = null
 summon_range = 3
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -124,6 +125,16 @@ texture_filter = 0
 render_priority = 2
 texture = ExtResource("2_wkwxg")
 hframes = 2
+
+[node name="CharacterTurnListener" type="Node" parent="."]
+script = ExtResource("6_ofdec")
+unit_name = "Vamper"
+
+[node name="CharacterMovementController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree", "collision_detector", "sfx")]
+script = ExtResource("5_aaepl")
+animation_tree = NodePath("../AnimationTree")
+collision_detector = NodePath("../CollisionDetector")
+sfx = NodePath("../StepSFX")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -150,16 +161,6 @@ parameters/turn_left/request = 0
 parameters/turn_right/active = false
 parameters/turn_right/internal_active = false
 parameters/turn_right/request = 0
-
-[node name="CharacterMovementController" type="Node3D" parent="." node_paths=PackedStringArray("animation_tree", "collision_detector", "sfx")]
-script = ExtResource("5_aaepl")
-animation_tree = NodePath("../AnimationTree")
-collision_detector = NodePath("../CollisionDetector")
-sfx = NodePath("../StepSFX")
-
-[node name="CharacterTurnListener" type="Node" parent="."]
-script = ExtResource("6_ofdec")
-unit_name = "Vamper"
 
 [node name="SummonController" type="Node" parent="." node_paths=PackedStringArray("sfx")]
 script = ExtResource("8_v5af1")
@@ -214,4 +215,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.655533, 0.895479)
 projection = 1
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
-[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

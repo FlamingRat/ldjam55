@@ -24,7 +24,6 @@ animation = &"turns/turn right"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xfhjo"]
 
 [resource]
-graph_offset = Vector2(143.586, 83.8726)
 nodes/Attack/node = SubResource("AnimationNodeAnimation_42ma6")
 nodes/Attack/position = Vector2(520, 450)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_klcdc")
