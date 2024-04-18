@@ -10,7 +10,7 @@ func rand():
     if not len(directions):
         return
 
-    movement_controller.move(directions.pick_random())
+    await movement_controller.move(directions.pick_random())
 
 
 func allowed_directions():

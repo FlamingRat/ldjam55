@@ -162,3 +162,4 @@ stream = ExtResource("17_u0i0f")
 pitch_scale = 3.43
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

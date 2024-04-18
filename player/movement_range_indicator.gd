@@ -2,6 +2,7 @@ extends Node3D
 
 
 @onready var indicator := $MeshInstance3D
+@onready var turn_listener: CharacterTurnListener = get_parent().get_node('CharacterTurnListener')
 
 
 func _process(_delta):
@@ -10,7 +11,7 @@ func _process(_delta):
         return
 
     var mesh: TorusMesh = indicator.mesh
-    var can_walk = parent.steps_available and parent.turn_actions
+    var can_walk = parent.steps_available and turn_listener.is_turn
     var radius = parent.steps_available + 0.5 if can_walk else 0.0
     
     if radius == mesh.outer_radius:

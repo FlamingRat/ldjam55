@@ -183,7 +183,8 @@ target_position = Vector3(1, 0, 0)
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="AttackRange" parent="." instance=ExtResource("5_mrubn")]
+[node name="AttackRange" parent="." node_paths=PackedStringArray("animator") instance=ExtResource("5_mrubn")]
+animator = NodePath("../AnimationTree")
 attack_damage = 3
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "sfx")]
@@ -241,3 +242,4 @@ stream = ExtResource("16_u74rq")
 pitch_scale = 3.43
 
 [connection signal="on_turn" from="CharacterTurnListener" to="." method="_on_character_turn_listener_on_turn"]
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

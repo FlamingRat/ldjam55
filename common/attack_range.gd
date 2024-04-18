@@ -23,7 +23,7 @@ var faction_self: Alignment.Faction:
 func attack_any():
     for area in get_overlapping_areas():
         var body = area.get_parent()
-        if body == self or not (area is Hitbox):
+        if body == self or not (area is Hitbox) or not weakref(body).get_ref():
             continue
 
         var alignment: Alignment = body.get_node('Alignment')
@@ -31,7 +31,7 @@ func attack_any():
             continue
 
         var health = body.get_node('Health')
-        if not (health is Health):
+        if not (health is Health) or not (health as Health).current_health:
             continue
 
         GlobalEvents.attack.emit(self, health)

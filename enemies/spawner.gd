@@ -23,10 +23,11 @@ func _on_character_turn_listener_on_turn():
     else:
         turn_counter += 1
 
-    GlobalEvents.end_turn()
+    Store.dispatch(Store.Action.END_TURN)
 
 
 func spawn_units():
+    print('spawning ', spawn_per_turn)
     for i in spawn_per_turn:
         var inst = spawn.instantiate()
         get_parent().add_child(inst)

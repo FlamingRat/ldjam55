@@ -10,7 +10,7 @@ func _ready():
 
 func _process(_delta):
     text = "Total Score: {score}
-Turns survived: {turns}".replace('{score}', str(score)).replace('{turns}', str(GlobalEvents.round_count))
+Turns survived: {turns}".replace('{score}', str(score)).replace('{turns}', str(Store.state.round_counter))
 
 
 func add_score():

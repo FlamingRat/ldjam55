@@ -13,7 +13,7 @@ func _on_character_turn_listener_on_turn():
     if not attack_success:
         await attack_range.attack_any()
 
-    GlobalEvents.end_turn()
+    Store.dispatch(Store.Action.END_TURN)
 
 
 func _on_health_health_depleted():

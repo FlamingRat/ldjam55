@@ -22,7 +22,7 @@ func _on_character_turn_listener_on_turn():
         if not attack_success:
             attack_success = await attack_range.attack_any()
 
-    GlobalEvents.end_turn()
+    Store.dispatch(Store.Action.END_TURN)
 
 
 func step():
@@ -38,11 +38,10 @@ func step():
         var move_direction = (Vector3.RIGHT if is_x else Vector3.BACK) * mult
 
         if movement.movement_allowed(move_direction):
-            movement.move(move_direction)
+            await movement.move(move_direction)
         else:
-            wander.rand()
+            await wander.rand()
 
-        await get_tree().create_timer(0.4).timeout
         return
 
     wander.rand()

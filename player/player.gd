@@ -16,11 +16,6 @@ class_name Player
 var summon_slot: int
 
 
-var turn_actions: bool:
-    get:
-        return GlobalEvents.current_turn_unit == self
-
-
 var actions = {
     "move_up": move_up,
     "move_down": move_down,
@@ -33,14 +28,18 @@ var actions = {
 
 
 func _process(_delta):
-    if GlobalEvents.current_turn_unit == self:
+    if Store.state.current_turn_unit == self:
         turn_input_listener()
 
 
 func _on_character_turn_listener_on_turn():
     steps_available = movement_speed
-    current_mana = min(current_mana + mana_regen, mana)
-    notify_sfx.play()
+    if current_mana and mana_regen:
+        current_mana = min(current_mana + mana_regen, mana)
+
+    if notify_sfx:
+        notify_sfx.play()
+
 
 func turn_input_listener():
     for action in actions:
@@ -113,9 +112,9 @@ func move_right():
 
 func end_turn():
     if GlobalEvents.player_state == GlobalEvents.PlayerState.WALKING:
-        GlobalEvents.end_turn()
+        Store.dispatch(Store.Action.END_TURN)
 
 
 func _on_health_health_depleted():
-    GlobalEvents.game_over.emit()
+    Store.dispatch(Store.Action.TRIGGER_GAME_OVER)
     queue_free()

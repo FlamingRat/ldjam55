@@ -30,7 +30,6 @@ sky_material = SubResource("ProceduralSkyMaterial_c5vxg")
 background_mode = 2
 sky = SubResource("Sky_dv2l5")
 tonemap_mode = 2
-volumetric_fog_enabled = true
 
 [sub_resource type="Animation" id="Animation_q3vdr"]
 length = 0.001
@@ -165,7 +164,6 @@ script = ExtResource("3_mka4u")
 [node name="Spawner" type="Node3D" parent="."]
 script = ExtResource("3_r3tab")
 spawn = ExtResource("3_qrpkt")
-spawn_cooldown = null
 spawn_range = 7
 spawn_per_turn = 1
 turns_per_spawn_per_turn_increase = 5

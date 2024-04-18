@@ -11,4 +11,4 @@ func _on_health_health_depleted():
 
 func _on_character_turn_listener_on_turn():
     health.current_health = min(health.max_health, health.current_health + 1)
-    GlobalEvents.end_turn()
+    Store.dispatch(Store.Action.END_TURN)

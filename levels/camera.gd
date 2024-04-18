@@ -7,10 +7,12 @@ var follow: Node3D
 
 func _ready():
     follow = GlobalEvents.current_turn_unit
-    GlobalEvents.next_turn_announced.connect(focus)
-    
+
     
 func _process(_delta):
+    if follow != Store.state.current_turn_unit:
+        focus(Store.state.current_turn_unit)
+
     if follow and not follow.is_queued_for_deletion():
         global_position = default_position + follow.global_position
 
@@ -37,5 +39,3 @@ func focus(unit: Node3D):
 func allow_next_turn(unit = null):
     if weakref(unit).get_ref() and not unit.is_queued_for_deletion():
         follow = unit
-
-    GlobalEvents.start_turn()
