@@ -2,6 +2,12 @@ extends Node
 class_name TurnsReducer
 
 
+enum TurnStatus {
+    ACTION,
+    TRANSITION,
+}
+
+
 static func register_unit(state: Store.State, message: Store.Message) -> Store.State:
     var unit: Node3D = message.payload
     state.units.append(unit)
@@ -31,4 +37,11 @@ static func end_turn(state: Store.State, message: Store.Message) -> Store.State:
         state.turn_counter = 0
         state.round_counter += 1
 
+    state.camera_focus = state.current_turn_unit.global_position
+    state.turn_status = TurnStatus.TRANSITION
+    return state
+
+
+static func start_turn(state: Store.State, message: Store.Message) -> Store.State:
+    state.turn_status = TurnStatus.ACTION
     return state

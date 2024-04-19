@@ -1,4 +1,5 @@
 extends Node
+class_name StoreType
 
 
 enum Action {
@@ -10,6 +11,8 @@ enum Action {
     END_TURN,
     TRIGGER_GAME_OVER,
     RETURN_TO_MAIN_MENU,
+    UPDATE_CAMERA_POSITION,
+    START_TURN,
 }
 
 
@@ -37,6 +40,8 @@ class State:
     var round_counter: int = 0
     var units: Array[Node3D] = []
     var turn_counter: int = 0
+    var turn_status: TurnsReducer.TurnStatus = TurnsReducer.TurnStatus.TRANSITION
+    var camera_focus: Vector3 = Vector3.ZERO
     var current_turn_unit: Node3D:
         get:
             if not len(units):
@@ -56,9 +61,11 @@ var reducers: Dictionary = {
     Action.ANNOUNCE_ATTACK: BattleLogReducer.announce_attack,
     Action.REGISTER_UNIT: TurnsReducer.register_unit,
     Action.UNREGISTER_UNIT: TurnsReducer.unregister_unit,
+    Action.START_TURN: TurnsReducer.start_turn,
     Action.END_TURN: TurnsReducer.end_turn,
     Action.TRIGGER_GAME_OVER: game_over,
     Action.RETURN_TO_MAIN_MENU: main_menu,
+    Action.UPDATE_CAMERA_POSITION: CameraReducer.update_camera_position,
 }
 
 

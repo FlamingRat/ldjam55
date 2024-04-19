@@ -40,7 +40,9 @@ func move(dir: Vector3) -> void:
 
     snap_to_grid()
     moving_direction = dir
-    move_tween.tween_property(parent, "global_position", parent.global_position + dir, 0.3)
+    var target: Vector3 = parent.global_position + dir
+    move_tween.tween_property(parent, "global_position", target, 0.3)
+    Store.dispatch(Store.Action.UPDATE_CAMERA_POSITION, target)
 
     if dir.x < 0 and facing_right:
         animation_tree.set('parameters/turn_left/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
