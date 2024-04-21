@@ -64,10 +64,10 @@ func movement_allowed(direction: Vector3):
         return true
 
     var current_pos = get_parent().global_position
-    if abs((current_pos + direction).x) > GlobalEvents.level_size.x / 2:
+    if abs((current_pos + direction).x) > Store.state.level.size.x / 2:
         return false
 
-    if abs((current_pos + direction).z) > GlobalEvents.level_size.y / 2:
+    if abs((current_pos + direction).z) > Store.state.level.size.y / 2:
         return false
 
     collision_detector.global_position = current_pos

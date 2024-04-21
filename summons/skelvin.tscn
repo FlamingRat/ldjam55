@@ -125,11 +125,9 @@ sfx = NodePath("../StepSFX")
 script = ExtResource("1_cttst")
 unit_name = "Skelvin"
 
-[node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "sfx")]
+[node name="Health" type="Node" parent="."]
 script = ExtResource("7_bempt")
 max_health = 6
-animation_tree = NodePath("../AnimationTree")
-sfx = NodePath("../DeathSFX")
 
 [node name="Hitbox" parent="." instance=ExtResource("8_xw1il")]
 

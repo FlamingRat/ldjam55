@@ -9,6 +9,10 @@ signal on_turn
 var is_turn: bool = false
 
 
+static func of(parent: Node3D) -> CharacterTurnListener:
+    return parent.get_node('CharacterTurnListener')
+
+
 func _ready() -> void:
     Store.update.connect(_on_next_turn)
     Store.dispatch(Store.Action.REGISTER_UNIT, get_parent())

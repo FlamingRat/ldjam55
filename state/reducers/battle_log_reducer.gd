@@ -23,3 +23,10 @@ static func announce_attack(state: Store.State, message: Store.Message) -> Store
     var target_name = unit_name(attack.target)
     state.battle_log += '\n' + attacker_name + ' attacks ' + target_name + '!'
     return state
+
+
+static func announce_kill(state: Store.State, message: Store.Message) -> Store.State:
+    var unit_name: String = message.payload
+    state.battle_log += '\n' + unit_name + ' died!'
+    state.kill_counter += 1
+    return state

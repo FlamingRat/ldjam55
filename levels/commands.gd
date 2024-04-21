@@ -8,23 +8,19 @@ const SUMMONING = "[WASD/Arrow keys] Move cursor
 [Space] Confirm summon"
 
 
-var player = true
-
-
-func _ready():
-    GlobalEvents.next_turn.connect(_on_turn)
+var unit: Node3D
 
 
 func _process(_delta):
-    if not player:
+    if not (unit is Player):
         text = ""
         return
 
-    if GlobalEvents.player_state == GlobalEvents.PlayerState.SUMMONING:
+    if unit.player_state == Player.PlayerState.SUMMONING:
         text = SUMMONING
     else:
         text = BASE_COMMANDS
 
 
 func _on_turn(unit):
-    player = unit is Player
+    unit = unit

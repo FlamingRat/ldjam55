@@ -27,3 +27,4 @@ func damage(hit: int):
             sfx.play()
             await get_tree().create_timer(.5).timeout
         health_depleted.emit()
+        Store.dispatch(Store.Action.ANNOUNCE_KILL, CharacterTurnListener.of(get_parent()).unit_name)

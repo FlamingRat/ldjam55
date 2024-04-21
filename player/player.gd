@@ -2,6 +2,12 @@ extends Node3D
 class_name Player
 
 
+enum PlayerState {
+    WALKING,
+    SUMMONING,
+}
+
+
 @export var summon_units: Array[PackedScene]
 @export var movement_speed: int
 @export var mana: int = 1
@@ -13,6 +19,7 @@ class_name Player
 @onready var collision_detector := $CollisionDetector
 @onready var steps_available = movement_speed
 @onready var current_mana = mana
+var player_state: PlayerState = PlayerState.WALKING
 var summon_slot: int
 
 
@@ -34,7 +41,7 @@ func _process(_delta):
 
 func _on_character_turn_listener_on_turn():
     steps_available = movement_speed
-    if current_mana and mana_regen:
+    if mana_regen:
         current_mana = min(current_mana + mana_regen, mana)
 
     if notify_sfx:
@@ -50,16 +57,16 @@ func turn_input_listener():
 
 
 func start_summon(new_summon_slot: int):
-    if not current_mana or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
+    if not current_mana or player_state != PlayerState.WALKING:
         return
 
-    GlobalEvents.player_state = GlobalEvents.PlayerState.SUMMONING
+    player_state = PlayerState.SUMMONING
     summon_slot = new_summon_slot
     summons.start_summon()
 
 
 func summon(pos: Vector3):
-    GlobalEvents.player_state = GlobalEvents.PlayerState.WALKING
+    player_state = PlayerState.WALKING
     var inst_unit: Node3D = summon_units[summon_slot].instantiate()
     get_parent().add_child(inst_unit)
     inst_unit.global_position = pos
@@ -67,7 +74,7 @@ func summon(pos: Vector3):
 
 
 func move_up():
-    if not steps_available or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
+    if not steps_available or player_state != PlayerState.WALKING:
         return
 
     if not movement.movement_allowed(Vector3.FORWARD):
@@ -78,7 +85,7 @@ func move_up():
 
 
 func move_down():
-    if not steps_available or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
+    if not steps_available or player_state != PlayerState.WALKING:
         return
 
     if not movement.movement_allowed(Vector3.BACK):
@@ -89,7 +96,7 @@ func move_down():
 
 
 func move_left():
-    if not steps_available or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
+    if not steps_available or player_state != PlayerState.WALKING:
         return
 
     if not movement.movement_allowed(Vector3.LEFT):
@@ -100,7 +107,7 @@ func move_left():
 
 
 func move_right():
-    if not steps_available or GlobalEvents.player_state != GlobalEvents.PlayerState.WALKING:
+    if not steps_available or player_state != PlayerState.WALKING:
         return
 
     if not movement.movement_allowed(Vector3.RIGHT):
@@ -111,7 +118,7 @@ func move_right():
 
 
 func end_turn():
-    if GlobalEvents.player_state == GlobalEvents.PlayerState.WALKING:
+    if player_state == PlayerState.WALKING:
         Store.dispatch(Store.Action.END_TURN)
 
 

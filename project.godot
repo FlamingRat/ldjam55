@@ -19,7 +19,6 @@ config/icon="res://vamper.png"
 
 [autoload]
 
-GlobalEvents="*res://global_events.gd"
 Store="*res://state/store.gd"
 
 [debug]

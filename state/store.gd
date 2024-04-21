@@ -8,11 +8,12 @@ enum Action {
     UNREGISTER_UNIT,
     ANNOUNCE_TURN,
     ANNOUNCE_ATTACK,
+    ANNOUNCE_KILL,
+    START_TURN,
     END_TURN,
     TRIGGER_GAME_OVER,
     RETURN_TO_MAIN_MENU,
     UPDATE_CAMERA_POSITION,
-    START_TURN,
 }
 
 
@@ -32,15 +33,23 @@ enum GameState {
 }
 
 
+class Level:
+    extends Node
+    
+    var size: Vector2 = Vector2(21, 15)
+
+
 class State:
     extends Node
 
     var game_state: GameState = GameState.MAIN_MENU
     var battle_log: String = "Vamper's turn!"
     var round_counter: int = 0
+    var kill_counter: int = 0
     var units: Array[Node3D] = []
     var turn_counter: int = 0
     var turn_status: TurnsReducer.TurnStatus = TurnsReducer.TurnStatus.TRANSITION
+    var level: Level = Level.new()
     var camera_focus: Vector3 = Vector3.ZERO
     var current_turn_unit: Node3D:
         get:
@@ -59,6 +68,7 @@ var reducers: Dictionary = {
     Action.START_GAME: start_game,
     Action.ANNOUNCE_TURN: BattleLogReducer.announce_turn,
     Action.ANNOUNCE_ATTACK: BattleLogReducer.announce_attack,
+    Action.ANNOUNCE_KILL: BattleLogReducer.announce_kill,
     Action.REGISTER_UNIT: TurnsReducer.register_unit,
     Action.UNREGISTER_UNIT: TurnsReducer.unregister_unit,
     Action.START_TURN: TurnsReducer.start_turn,
@@ -81,7 +91,6 @@ func dispatch(action_name: Action, payload: Variant = null) -> void:
 
 func start_game(state: State, message: Message) -> State:
     state.game_state = GameState.RUNNING
-    state.turn_counter = 0
     return state
 
 
@@ -91,5 +100,4 @@ func game_over(state: State, message: Message) -> State:
 
 
 func main_menu(state: State, message: Message) -> State:
-    state.game_state = GameState.MAIN_MENU
-    return state
+    return State.new()

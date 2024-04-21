@@ -7,7 +7,7 @@ class Attack:
     var target: Node3D
 
 
-    func _init(attacker, target):
+    func _init(attacker: AttackRange, target: Health):
         self.attacker = attacker.get_parent()
         self.target = target.get_parent()
 
@@ -30,11 +30,10 @@ func attack_any():
         if alignment and alignment.faction == faction_self:
             continue
 
-        var health = body.get_node('Health')
+        var health: Health = body.get_node('Health')
         if not (health is Health) or not (health as Health).current_health:
             continue
 
-        GlobalEvents.attack.emit(self, health)
         var attack: Attack = Attack.new(self, health)
         Store.dispatch(Store.Action.ANNOUNCE_ATTACK, attack)
         health.damage(attack_damage)

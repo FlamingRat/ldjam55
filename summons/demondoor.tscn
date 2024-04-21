@@ -135,6 +135,7 @@ hframes = 9
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "sfx")]
 script = ExtResource("2_r11jc")
+max_health = null
 animation_tree = NodePath("../AnimationTree")
 sfx = NodePath("../DeathSFX")
 

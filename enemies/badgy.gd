@@ -44,8 +44,7 @@ func step():
 
         return
 
-    wander.rand()
-    await get_tree().create_timer(0.4).timeout
+    await wander.rand()
 
 
 func _on_health_health_depleted():

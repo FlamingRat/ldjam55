@@ -1,17 +1,7 @@
 extends Label
 
 
-var score = 0
-
-
-func _ready():
-    GlobalEvents.kill.connect(add_score)
-
-
 func _process(_delta):
+    var score: int = Store.state.kill_counter
     text = "Total Score: {score}
 Turns survived: {turns}".replace('{score}', str(score)).replace('{turns}', str(Store.state.round_counter))
-
-
-func add_score():
-    score += 1

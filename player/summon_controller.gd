@@ -20,7 +20,7 @@ var frame_lock = false
 
 
 func _process(_delta):
-    var summoning = GlobalEvents.player_state == GlobalEvents.PlayerState.SUMMONING
+    var summoning = player.player_state == player.PlayerState.SUMMONING
     if not summoning or frame_lock:
         frame_lock = false
         return
@@ -87,10 +87,10 @@ func summon_allowed():
         return true
 
     var current_pos = indicator.global_position
-    if abs(current_pos.x) > GlobalEvents.level_size.x / 2:
+    if abs(current_pos.x) > Store.state.level.size.x / 2:
         return false
 
-    if abs(current_pos.z) > GlobalEvents.level_size.y / 2:
+    if abs(current_pos.z) > Store.state.level.size.y / 2:
         return false
 
     var collisions = []

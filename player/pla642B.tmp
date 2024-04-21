@@ -161,10 +161,10 @@ parameters/turn_right/active = false
 parameters/turn_right/internal_active = false
 parameters/turn_right/request = 0
 
-[node name="SummonController" type="Node" parent="." node_paths=PackedStringArray("sfx")]
+[node name="SummonController" type="Node" parent="."]
 script = ExtResource("8_v5af1")
 summon_indicator = ExtResource("2_3inrr")
-sfx = NodePath("../SummonSFX")
+sfx = null
 
 [node name="SummonPositionValidator" type="RayCast3D" parent="SummonController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
