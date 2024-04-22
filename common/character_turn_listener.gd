@@ -21,7 +21,7 @@ func _ready() -> void:
 func _on_next_turn(state: Store.State) -> void:
     var action: bool = state.turn_status == TurnsReducer.TurnStatus.ACTION
     var next_frame_is_turn: bool = state.current_turn_unit == get_parent()
-    var go: bool = next_frame_is_turn and action
+    var go: bool = next_frame_is_turn and action and get_parent().is_node_ready()
     if go and not is_turn:
         print('next turn called for ', get_parent())
         is_turn = true

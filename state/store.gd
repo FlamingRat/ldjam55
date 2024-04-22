@@ -55,8 +55,8 @@ class State:
     var units: Array[Node3D]:
         get:
             var arr: Array[Node3D] = []
-            arr.append_array(allied_units)
             arr.append_array(enemy_units)
+            arr.append_array(allied_units)
             return arr
     var current_turn_unit: Node3D:
         get:

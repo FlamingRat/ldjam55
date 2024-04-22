@@ -16,8 +16,8 @@ func _on_character_turn_listener_on_turn():
     if not (total_turn_counter % turns_per_spawn_per_turn_increase):
         spawn_per_turn += 1
 
-    spawn_units()
-    announce_next_spawn_positions()
+    spawn_units.call_deferred()
+    announce_next_spawn_positions.call_deferred()
 
     Store.dispatch(Store.Action.END_TURN)
 
@@ -40,7 +40,7 @@ func announce_next_spawn_positions():
 func spawn_units():
     for indicator in spawn_positions:
         var inst = spawn.instantiate()
-        get_parent().add_child.call_deferred(inst)
+        get_parent().add_child(inst)
         inst.global_position = indicator.global_position
         indicator.queue_free()
 

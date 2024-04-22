@@ -26,7 +26,7 @@ func attack_any():
         if body == self or not (area is Hitbox) or not weakref(body).get_ref():
             continue
 
-        var alignment: Alignment = body.get_node('Alignment')
+        var alignment: Alignment = body.get_node_or_null('Alignment')
         if alignment and alignment.faction == faction_self:
             continue
 

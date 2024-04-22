@@ -133,15 +133,15 @@ sfx = NodePath("../DeathSFX")
 
 [node name="Hitbox" parent="." instance=ExtResource("8_xw1il")]
 
-[node name="AttackRange" parent="." node_paths=PackedStringArray("animator") instance=ExtResource("8_sf5pn")]
-animator = NodePath("../AnimationTree")
-attack_damage = 3
-
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("9_3p48q")
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_fedya")]
 health = NodePath("../Health")
+
+[node name="AttackRange" parent="." node_paths=PackedStringArray("animator") instance=ExtResource("8_sf5pn")]
+animator = NodePath("../AnimationTree")
+attack_damage = 3
 
 [node name="WanderMovement" type="Node" parent="." node_paths=PackedStringArray("movement_controller")]
 script = ExtResource("11_rmct2")

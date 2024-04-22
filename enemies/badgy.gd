@@ -7,13 +7,18 @@ class_name Badgy
 @onready var movement := $CharacterMovementController
 @onready var wander := $WanderMovement
 @onready var alignment := $Alignment
+@onready var turn_listener := $CharacterTurnListener
 @export var movement_speed: int
 var faction_self: Alignment.Faction:
     get:
         return alignment.faction
 
 
-func _on_character_turn_listener_on_turn():
+func _ready():
+    turn_listener.on_turn.connect(_on_turn)
+
+
+func _on_turn():
     var attack_success = await attack_range.attack_any()
 
     for _loop in movement_speed:

@@ -14,10 +14,14 @@ static func register_unit(state: Store.State, message: Store.Message) -> Store.S
     if not alignment:
         printerr('Missing Alignment for registered unit ', unit)
 
+    var turn_unit: Node3D = state.current_turn_unit
+    
     if alignment.faction == Alignment.Faction.CROSS:
         state.enemy_units.append(unit)
     else:
         state.allied_units.append(unit)
+
+    state.turn_counter = state.units.find(turn_unit)
 
     unit.tree_exiting.connect(func(): Store.dispatch(Store.Action.UNREGISTER_UNIT, unit))
     return state
