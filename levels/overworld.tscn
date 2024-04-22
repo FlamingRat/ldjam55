@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://beppg36hn1e7c"]
+[gd_scene load_steps=39 format=3 uid="uid://beppg36hn1e7c"]
 
 [ext_resource type="PackedScene" uid="uid://c31hns2nx6jxu" path="res://ui/ui.tscn" id="1_a201a"]
 [ext_resource type="PackedScene" uid="uid://c7biv641mnrue" path="res://player/player.tscn" id="2_7cvbh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://caut86utiy4sd" path="res://enemies/badgy.tscn" id="3_qrpkt"]
 [ext_resource type="Script" path="res://enemies/spawner.gd" id="3_r3tab"]
 [ext_resource type="Script" path="res://common/character_turn_listener.gd" id="5_6jcuj"]
+[ext_resource type="PackedScene" uid="uid://kaywyi3v601h" path="res://ui/next_spawn_indicator.tscn" id="5_ljefu"]
 [ext_resource type="Script" path="res://common/alignment.gd" id="6_imaqq"]
 [ext_resource type="Texture2D" uid="uid://c4hnbbj2m6iaj" path="res://ui/vamper_walls.png" id="9_5nfgd"]
 [ext_resource type="Texture2D" uid="uid://kt057pvlb8b2" path="res://ui/vampetiles.png" id="9_p8bsw"]
@@ -165,6 +166,7 @@ script = ExtResource("3_mka4u")
 [node name="Spawner" type="Node3D" parent="."]
 script = ExtResource("3_r3tab")
 spawn = ExtResource("3_qrpkt")
+spawn_indicator = ExtResource("5_ljefu")
 spawn_range = 7
 spawn_per_turn = 1
 turns_per_spawn_per_turn_increase = 5

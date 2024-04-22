@@ -3,42 +3,49 @@ class_name Spawner
 
 
 @export var spawn: PackedScene
-@export var spawn_cooldown: int
+@export var spawn_indicator: PackedScene
 @export var spawn_range: int
 @export var spawn_per_turn: int
 @export var turns_per_spawn_per_turn_increase: int
-@onready var turn_counter = spawn_cooldown
 @onready var spawn_checker = $SpawnChecker
-var total_turn_counter = 0
+var total_turn_counter = 1
+var spawn_positions: Array[Node3D] = []
 
 
 func _on_character_turn_listener_on_turn():
-    total_turn_counter += 1
     if not (total_turn_counter % turns_per_spawn_per_turn_increase):
         spawn_per_turn += 1
-    
-    if turn_counter >= spawn_cooldown:
-        spawn_units()
-        turn_counter = 0
-    else:
-        turn_counter += 1
+
+    spawn_units()
+    announce_next_spawn_positions()
 
     Store.dispatch(Store.Action.END_TURN)
 
 
-func spawn_units():
+func announce_next_spawn_positions():
+    spawn_positions = []
     print('spawning ', spawn_per_turn)
     for i in spawn_per_turn:
-        var inst = spawn.instantiate()
-        get_parent().add_child(inst)
-        var randpos = random_spawn()
+        var randpos: Vector3 = random_spawn()
         while not valid_spawn(randpos):
             randpos = random_spawn()
 
-        inst.global_position = global_position + randpos
+        var indicator: Node3D = spawn_indicator.instantiate()
+        get_parent().add_child(indicator)
+        indicator.global_position = randpos
+        spawn_positions.append(indicator)
+    
 
 
-func random_spawn():
+func spawn_units():
+    for indicator in spawn_positions:
+        var inst = spawn.instantiate()
+        get_parent().add_child.call_deferred(inst)
+        inst.global_position = indicator.global_position
+        indicator.queue_free()
+
+
+func random_spawn() -> Vector3:
     return Vector3(randi_range(-spawn_range, spawn_range), 0, randi_range(-spawn_range, spawn_range))
 
 

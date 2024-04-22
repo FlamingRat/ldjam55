@@ -1,20 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccwhs1dn3tpvv"]
+[gd_scene load_steps=10 format=3 uid="uid://kaywyi3v601h"]
+
+[ext_resource type="PackedScene" uid="uid://j42lyhv85siv" path="res://common/hitbox.tscn" id="1_gooq1"]
 
 [sub_resource type="Gradient" id="Gradient_6gr5p"]
 offsets = PackedFloat32Array(0, 0.218978, 0.364964, 0.985401, 1)
-colors = PackedColorArray(0, 0, 0, 0, 1, 0.121569, 0.121569, 0.972549, 0.0463, 0.155349, 0.155349, 0.155349, 0.013365, 0.0448431, 0.0448431, 0.0448431, 1, 0.121569, 0.121569, 0.972549)
+colors = PackedColorArray(0, 0, 0, 0, 0.290196, 0.968627, 0.937255, 0.972549, 0.0463, 0.155349, 0.155349, 0.155349, 0.013365, 0.0448431, 0.0448431, 0.0448431, 0.290196, 0.968627, 0.937255, 0.972549)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4x2dv"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ctrxp"]
 gradient = SubResource("Gradient_6gr5p")
 fill_from = Vector2(0.623932, 0.0555556)
 fill_to = Vector2(0.777778, 0.923077)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iaynu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7sjet"]
 transparency = 1
-albedo_texture = SubResource("GradientTexture2D_4x2dv")
+albedo_texture = SubResource("GradientTexture2D_ctrxp")
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_ubioh"]
-material = SubResource("StandardMaterial3D_iaynu")
+[sub_resource type="CylinderMesh" id="CylinderMesh_bdgdr"]
+material = SubResource("StandardMaterial3D_7sjet")
 radial_segments = 12
 rings = 1
 
@@ -59,11 +61,11 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mwl4"]
 animation = &"spin"
 
-[node name="SummonIndicator" type="Node3D"]
+[node name="NextSpawnIndicator" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CylinderMesh_ubioh")
+mesh = SubResource("CylinderMesh_bdgdr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -76,3 +78,5 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeAnimation_7mwl4")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="Hitbox" parent="." instance=ExtResource("1_gooq1")]
