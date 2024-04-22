@@ -46,11 +46,18 @@ class State:
     var battle_log: String = "Vamper's turn!"
     var round_counter: int = 0
     var kill_counter: int = 0
-    var units: Array[Node3D] = []
+    var allied_units: Array[Node3D] = []
+    var enemy_units: Array[Node3D] = []
     var turn_counter: int = 0
     var turn_status: TurnsReducer.TurnStatus = TurnsReducer.TurnStatus.TRANSITION
     var level: Level = Level.new()
     var camera_focus: Vector3 = Vector3.ZERO
+    var units: Array[Node3D]:
+        get:
+            var arr: Array[Node3D] = []
+            arr.append_array(allied_units)
+            arr.append_array(enemy_units)
+            return arr
     var current_turn_unit: Node3D:
         get:
             if not len(units):

@@ -10,7 +10,15 @@ enum TurnStatus {
 
 static func register_unit(state: Store.State, message: Store.Message) -> Store.State:
     var unit: Node3D = message.payload
-    state.units.append(unit)
+    var alignment: Alignment = unit.get_node("Alignment")
+    if not alignment:
+        printerr('Missing Alignment for registered unit ', unit)
+
+    if alignment.faction == Alignment.Faction.CROSS:
+        state.enemy_units.append(unit)
+    else:
+        state.allied_units.append(unit)
+
     unit.tree_exiting.connect(func(): Store.dispatch(Store.Action.UNREGISTER_UNIT, unit))
     return state
 
@@ -19,12 +27,20 @@ static func unregister_unit(state: Store.State, message: Store.Message) -> Store
     var unit: Node3D = message.payload
     var alignment = unit.get_node('Alignment')
 
-    #if alignment and alignment.faction != Alignment.Faction.VAMPER:
-        #kill.emit()
+    if not alignment:
+        printerr('Missing Alignment for registered unit ', unit)
+        
+    var ref: Array[Node3D]
+    if alignment.faction == Alignment.Faction.VAMPER:
+        ref = state.allied_units
+    else:
+        ref = state.enemy_units
 
-    var slot = state.units.find(unit)
-    state.units.remove_at(slot)
-    if slot > state.turn_counter:
+    var slot: int = ref.find(unit)
+    ref.remove_at(slot)
+    
+    var global_slot: int = state.units.find(unit)
+    if global_slot > state.turn_counter:
         return state
 
     state.turn_counter -= 1
