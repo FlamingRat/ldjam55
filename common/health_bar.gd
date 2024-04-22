@@ -5,8 +5,8 @@ extends Sprite3D
 
 
 func _process(_delta):
-    var percent = health.percent
-    if percent != (texture as GradientTexture2D).width:
-        var tween = create_tween()
-        var new_scale = Vector3(percent, 1, 1)
-        tween.tween_property(self, 'scale', new_scale, 0.4)
+	var percent = health.percent
+	if percent != (texture as GradientTexture2D).width:
+		var tween = create_tween()
+		var new_scale = Vector3(percent, 1, 1)
+		tween.tween_property(self, 'scale', new_scale, 0.4)

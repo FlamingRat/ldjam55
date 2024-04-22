@@ -6,18 +6,18 @@ class_name WanderMovement
 
 
 func rand():
-    var directions = allowed_directions()
-    if not len(directions):
-        return
+	var directions = allowed_directions()
+	if not len(directions):
+		return
 
-    await movement_controller.move(directions.pick_random())
+	await movement_controller.move(directions.pick_random())
 
 
 func allowed_directions():
-    var directions = []
-    for dir in [Vector3.FORWARD, Vector3.LEFT, Vector3.BACK, Vector3.RIGHT]:
-        if movement_controller.movement_allowed(dir):
-            directions.append(dir)
+	var directions = []
+	for dir in [Vector3.FORWARD, Vector3.LEFT, Vector3.BACK, Vector3.RIGHT]:
+		if movement_controller.movement_allowed(dir):
+			directions.append(dir)
 
-    print(directions)
-    return directions
+	print(directions)
+	return directions
