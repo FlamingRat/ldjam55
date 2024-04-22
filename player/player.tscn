@@ -173,9 +173,11 @@ collide_with_areas = true
 
 [node name="MovementRangeIndicator" parent="." instance=ExtResource("10_gppho")]
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "sfx")]
 script = ExtResource("11_ghche")
 max_health = 15
+animation_tree = NodePath("../AnimationTree")
+sfx = NodePath("../DeathSFX")
 
 [node name="Alignment" type="Node" parent="."]
 script = ExtResource("12_mmwt1")
